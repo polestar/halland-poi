@@ -93,6 +93,7 @@ class MainScreen(carContext: CarContext) : Screen(carContext) {
     }
 
     private fun onPreviewClicked() {
-        CarToast.makeText(carContext, "Button Clicked", CarToast.LENGTH_LONG).show()
+//        CarToast.makeText(carContext, "Button Clicked", CarToast.LENGTH_LONG).show()
+        screenManager.push(PlaceListScreen(carContext))
     }
 }
