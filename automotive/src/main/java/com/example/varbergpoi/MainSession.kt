@@ -22,77 +22,42 @@ class MainSession : Session() {
 class MainScreen(carContext: CarContext) : Screen(carContext) {
     override fun onGetTemplate(): Template {
         val gridItemListBuilder = ItemList.Builder()
-        gridItemListBuilder.addItem(
-            GridItem.Builder().setTitle("Restaurants").setOnClickListener { onIconClicked() }
-                .setImage(
-                    CarIcon.Builder(
-                        IconCompat.createWithResource(carContext, R.drawable.restaurants_icon)
-                    ).build()
-                ).build()
-        )
-        gridItemListBuilder.addItem(
-            GridItem.Builder().setTitle("Charging stations")
-                .setOnClickListener { onIconClicked() }.setImage(
-                CarIcon.Builder(
-                    IconCompat.createWithResource(carContext, R.drawable.charging_stations_icon)
-                ).build()
-            ).build()
-        )
-        gridItemListBuilder.addItem(
-            GridItem.Builder().setTitle("Hiking areas").setOnClickListener { onIconClicked() }
-                .setImage(
-                    CarIcon.Builder(
-                        IconCompat.createWithResource(carContext, R.drawable.hiking_areas_icon)
-                    ).build()
-                ).build()
-        )
-        gridItemListBuilder.addItem(
-            GridItem.Builder().setTitle("Beaches").setOnClickListener { onIconClicked() }
-                .setImage(
-                    CarIcon.Builder(
-                        IconCompat.createWithResource(carContext, R.drawable.beaches_icon)
-                    ).build()
-                ).build()
-        )
-        gridItemListBuilder.addItem(
-            GridItem.Builder().setTitle("Hotels").setOnClickListener { onIconClicked() }
-                .setImage(
-                    CarIcon.Builder(
-                        IconCompat.createWithResource(carContext, R.drawable.hotels_icon)
-                    ).build()
-                ).build()
-        )
-        gridItemListBuilder.addItem(
-            GridItem.Builder().setTitle("Parking spaces").setOnClickListener { onIconClicked() }
-                .setImage(
-                    CarIcon.Builder(
-                        IconCompat.createWithResource(carContext, R.drawable.parking_spaces_icon)
-                    ).build()
-                ).build()
-        )
-        gridItemListBuilder.addItem(
-            GridItem.Builder().setTitle("Bike rental").setOnClickListener { onIconClicked() }
-                .setImage(
-                    CarIcon.Builder(
-                        IconCompat.createWithResource(carContext, R.drawable.bike_rental_icon)
-                    ).build()
-                ).build()
-        )
-        gridItemListBuilder.addItem(
-            GridItem.Builder().setTitle("Museums").setOnClickListener { onIconClicked() }
-                .setImage(
-                    CarIcon.Builder(
-                        IconCompat.createWithResource(carContext, R.drawable.museums_icon)
-                    ).build()
-                ).build()
+
+        val poiData = listOf(
+            PoiData("Restaurants", R.drawable.restaurants_icon),
+            PoiData("Charging stations", R.drawable.charging_stations_icon),
+            PoiData("Hiking areas", R.drawable.hiking_areas_icon),
+            PoiData("Beaches", R.drawable.beaches_icon),
+            PoiData("Hotels", R.drawable.hotels_icon),
+            PoiData("Parking spaces", R.drawable.parking_spaces_icon),
+            PoiData("Bike rental", R.drawable.bike_rental_icon),
+            PoiData("Museums", R.drawable.museums_icon)
         )
 
-        return GridTemplate.Builder().setTitle("Points of interest")
-            .setSingleList(gridItemListBuilder.build()).build()
+        for (data in poiData) {
+            val gridItemBuilder = GridItem.Builder()
+                .setTitle(data.title)
+                .setOnClickListener { onIconClicked() }
+                .setImage(
+                    CarIcon.Builder(
+                        IconCompat.createWithResource(carContext, data.iconResId)
+                    ).build()
+                )
+                .build()
+
+            gridItemListBuilder.addItem(gridItemBuilder)
+        }
+
+        return GridTemplate.Builder()
+            .setTitle("Points of interest")
+            .setSingleList(gridItemListBuilder.build())
+            .build()
     }
 
     private fun onIconClicked() {
-//        CarToast.makeText(carContext, "Button Clicked", CarToast.LENGTH_LONG).show()
         screenManager.push(PlaceListScreen(carContext))
     }
+
+    // Data class to hold POI information
+    data class PoiData(val title: String, val iconResId: Int)
 }
