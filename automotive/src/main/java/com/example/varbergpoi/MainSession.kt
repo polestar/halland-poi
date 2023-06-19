@@ -55,7 +55,8 @@ class MainScreen(carContext: CarContext) : Screen(carContext) {
     }
 
     private fun onIconClicked() {
-        screenManager.push(PlaceListScreen(carContext))
+        screenManager.push(SubCategoryListScreen(carContext))
+//        screenManager.push(PlaceListScreen(carContext))
     }
 
     // Data class to hold POI information
