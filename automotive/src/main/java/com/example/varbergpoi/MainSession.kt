@@ -1,6 +1,7 @@
 package com.example.varbergpoi
 
 import android.content.Intent
+import android.util.Log
 import androidx.car.app.CarContext
 import androidx.car.app.Screen
 import androidx.car.app.Session
@@ -10,19 +11,20 @@ import androidx.car.app.model.GridTemplate
 import androidx.car.app.model.ItemList
 import androidx.car.app.model.Template
 import androidx.core.graphics.drawable.IconCompat
+import com.example.varbergpoi.dummydata.DummyHandler
 
 
 class MainSession : Session() {
     override fun onCreateScreen(intent: Intent): Screen {
         return MainScreen(carContext)
     }
-
 }
 
 class MainScreen(carContext: CarContext) : Screen(carContext) {
     override fun onGetTemplate(): Template {
-        val gridItemListBuilder = ItemList.Builder()
+        printDummyData()
 
+        val gridItemListBuilder = ItemList.Builder()
         val poiData = listOf(
             PoiData("Restaurants", R.drawable.restaurants_icon),
             PoiData("Charging stations", R.drawable.charging_stations_icon),
@@ -52,6 +54,18 @@ class MainScreen(carContext: CarContext) : Screen(carContext) {
             .setTitle("Points of interest")
             .setSingleList(gridItemListBuilder.build())
             .build()
+    }
+    private fun printDummyData(){
+        val dHandler = DummyHandler.getInstance()
+        dHandler.categories.forEach { category ->
+            Log.d("catlist", carContext.getString(category.titleRes!!))
+            category.subCategories.forEach { subCat ->
+                Log.d("catlist", "--"+carContext.getString(subCat.titleRes!!))
+                subCat.points.forEach { point ->
+                    Log.d("catlist", "----$point")
+                }
+            }
+        }
     }
 
     private fun onIconClicked() {

@@ -11,5 +11,9 @@
     <string name="browse_places_title">Browse Places</string>
     <string name="place_list_template_demo_title">Place List Template Demo</string>
     <string name="lorem_ipsum">Place List Template Demo</string>
+    <string name="category_food_drinks_title"><![CDATA[Food & Drinks]]></string>
+    <string name="subcategory_food_title">Food</string>
+    <string name="subcategory_drinks_title">Drinks</string>
+    <string name="subcategory_fika_title">Fika</string>
 
 </resources>
