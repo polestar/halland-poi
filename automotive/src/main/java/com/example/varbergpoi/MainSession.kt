@@ -1,9 +1,10 @@
 package com.example.varbergpoi
 
 import android.content.Intent
-import android.util.Log
+import android.content.pm.PackageManager
 import androidx.car.app.CarContext
 import androidx.car.app.Screen
+import androidx.car.app.ScreenManager
 import androidx.car.app.Session
 import androidx.car.app.model.CarIcon
 import androidx.car.app.model.GridItem
@@ -16,8 +17,18 @@ import com.example.varbergpoi.dummydata.DummyHandler
 
 class MainSession : Session() {
     override fun onCreateScreen(intent: Intent): Screen {
-        return MainScreen(carContext)
+        return if(hasLocationPermission())
+            MainScreen(carContext)
+        else{
+            carContext.getCarService(ScreenManager::class.java).push(MainScreen(carContext))
+            LocationPermissionScreen(carContext)
+        }
     }
+
+
+    private fun hasLocationPermission() =
+        (carContext.checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED)
 }
 
 class MainScreen(carContext: CarContext) : Screen(carContext) {

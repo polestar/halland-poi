@@ -11,5 +11,8 @@
     <string name="browse_places_title">Browse Places</string>
     <string name="place_list_template_demo_title">Place List Template Demo</string>
     <string name="lorem_ipsum">Place List Template Demo</string>
+    <string name="ok">OK</string>
+    <string name="skip">Skip</string>
+    <string name="location_permission_message">Lorem ipsum permission request message</string>
 
 </resources>
