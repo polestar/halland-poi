@@ -1,5 +1,6 @@
 package com.example.varbergpoi
 
+import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.car.app.CarContext
@@ -17,9 +18,9 @@ import com.example.varbergpoi.dummydata.DummyHandler
 
 class MainSession : Session() {
     override fun onCreateScreen(intent: Intent): Screen {
-        return if(hasLocationPermission())
+        return if (hasLocationPermission())
             MainScreen(carContext)
-        else{
+        else {
             carContext.getCarService(ScreenManager::class.java).push(MainScreen(carContext))
             LocationPermissionScreen(carContext)
         }
@@ -27,7 +28,7 @@ class MainSession : Session() {
 
 
     private fun hasLocationPermission() =
-        (carContext.checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION)
+        (carContext.checkSelfPermission(ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED)
 }
 
@@ -51,12 +52,21 @@ class MainScreen(carContext: CarContext) : Screen(carContext) {
             val gridItemBuilder = GridItem.Builder()
                 .setTitle(data.title)
                 .setOnClickListener {
-                    if(data.subCategories.isNotEmpty())
-                        screenManager.push(SubCategoryListScreen(carContext, data.title, data.subCategories))
+                    if (data.subCategories.isNotEmpty())
+                        screenManager.push(
+                            SubCategoryListScreen(
+                                carContext,
+                                data.title,
+                                data.subCategories
+                            )
+                        )
                 }
                 .setImage(
                     CarIcon.Builder(
-                        IconCompat.createWithResource(carContext, data.iconRes ?: R.drawable.restaurants_icon)
+                        IconCompat.createWithResource(
+                            carContext,
+                            data.iconRes ?: R.drawable.restaurants_icon
+                        )
                     ).build()
                 )
                 .build()
