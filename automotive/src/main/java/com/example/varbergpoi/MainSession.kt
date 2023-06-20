@@ -58,9 +58,9 @@ class MainScreen(carContext: CarContext) : Screen(carContext) {
     private fun printDummyData(){
         val dHandler = DummyHandler.getInstance()
         dHandler.categories.forEach { category ->
-            Log.d("catlist", carContext.getString(category.titleRes!!))
+            Log.d("catlist", carContext.getString(category.titleRes))
             category.subCategories.forEach { subCat ->
-                Log.d("catlist", "--"+carContext.getString(subCat.titleRes!!))
+                Log.d("catlist", "--"+carContext.getString(subCat.titleRes))
                 subCat.points.forEach { point ->
                     Log.d("catlist", "----$point")
                 }

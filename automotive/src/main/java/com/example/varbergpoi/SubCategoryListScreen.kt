@@ -17,7 +17,6 @@ package com.example.varbergpoi
  * limitations under the License.
  */
 
-import android.R
 import androidx.car.app.CarContext
 import androidx.car.app.CarToast
 import androidx.car.app.Screen
@@ -34,13 +33,17 @@ import androidx.car.app.model.Template
 import androidx.car.app.versioning.CarAppApiLevels
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.DefaultLifecycleObserver
+import com.example.varbergpoi.dummydata.SubCategory
 
 
 /**
  * Creates a screen that demonstrates usage of the full screen [ListTemplate] to display a
  * full-screen list.
  */
-class SubCategoryListScreen(carContext: CarContext) : Screen(carContext),
+class SubCategoryListScreen(
+    carContext: CarContext,
+    private val subCategories: List<SubCategory> = listOf()
+) : Screen(carContext),
     DefaultLifecycleObserver {
     init {
         lifecycle.addObserver(this)
@@ -48,20 +51,24 @@ class SubCategoryListScreen(carContext: CarContext) : Screen(carContext),
 
     override fun onGetTemplate(): Template {
         val listBuilder = ItemList.Builder()
-        listBuilder.addItem(
-            Row.Builder()
-                .setOnClickListener(
-                    ParkedOnlyOnClickListener.create {
+        subCategories.forEach { subCat ->
+            listBuilder.addItem(
+                Row.Builder()
+                    .setOnClickListener(
+                        ParkedOnlyOnClickListener.create {
 
-                    })
-                .setTitle(("Restauranger")).setImage(
-                    CarIcon.Builder(
-                        IconCompat.createWithResource(carContext, com.example.varbergpoi.R.drawable.restaurants_icon)
+                        })
+                    .setTitle(carContext.getString(subCat.titleRes)).setImage(
+                        CarIcon.Builder(
+                            IconCompat.createWithResource(
+                                carContext,
+                                R.drawable.restaurants_icon
+                            )
+                        ).build()
                     ).build()
-                ).build())
+            )
                 .build()
-
-
+        }
 //         Some hosts may allow more items in the list than others, so create more.
         if (carContext.carAppApiLevel > CarAppApiLevels.LEVEL_1) {
             val listLimit = Math.min(
@@ -82,11 +89,11 @@ class SubCategoryListScreen(carContext: CarContext) : Screen(carContext),
                     )
                     .addVariant(secondTextStr)
                     .build()
-                val onClickText = "Cliked row: " + i
+                val onClickText = "Clicked row: $i"
                 val rowBuilder = Row.Builder()
                     .setOnClickListener { onClick(onClickText) }
                     .setTitle(
-                        "Title prefix " + i
+                        "Title prefix $i"
                     )
                 if (i % 2 == 0) {
                     rowBuilder.addText("Long line text")
