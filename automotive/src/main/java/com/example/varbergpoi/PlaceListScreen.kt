@@ -22,9 +22,11 @@ import androidx.car.app.model.Template
 import androidx.core.location.LocationListenerCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import com.example.varbergpoi.dummydata.POIItem
 
 
-class PlaceListScreen(carContext: CarContext) : Screen(carContext) {
+class PlaceListScreen(carContext: CarContext, var items: List<POIItem> = listOf()) :
+    Screen(carContext) {
     val mLocationListener: LocationListenerCompat
     val mLocationUpdateHandlerThread: HandlerThread
     var mHasPermissionLocation: Boolean
@@ -78,17 +80,13 @@ class PlaceListScreen(carContext: CarContext) : Screen(carContext) {
     }
 
     override fun onGetTemplate(): Template {
+        val listBuilder = ItemList.Builder()
+        items.forEach { item ->
+            listBuilder.addItem(Row.Builder().setOnClickListener { }.setTitle(item.title).build())
+        }
         val builder = PlaceListMapTemplate.Builder()
             .setItemList(
-                ItemList.Builder()
-                    .addItem(
-                        Row.Builder()
-                            .setTitle(carContext.getString(R.string.browse_places_title))
-                            .setBrowsable(true)
-                            .setOnClickListener {
-                            }.build()
-                    )
-                    .build()
+                listBuilder.build()
             )
             .setTitle(carContext.getString(R.string.place_list_template_demo_title))
             .setHeaderAction(Action.BACK)

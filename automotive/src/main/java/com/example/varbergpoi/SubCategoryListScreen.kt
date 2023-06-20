@@ -54,11 +54,7 @@ class SubCategoryListScreen(
         val listBuilder = ItemList.Builder()
         subCategories.forEach { subCat ->
             listBuilder.addItem(
-                Row.Builder()
-                    .setOnClickListener(
-                        ParkedOnlyOnClickListener.create {
-
-                        })
+                Row.Builder().setOnClickListener { screenManager.push(PlaceListScreen(carContext, subCat.points)) }
                     .setTitle(subCat.title)
                     .setImage(
                         CarIcon.Builder(
