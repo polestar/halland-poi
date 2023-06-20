@@ -1,6 +1,5 @@
 package com.example.varbergpoi.dummydata
 
-import android.os.Parcelable
 import com.example.varbergpoi.R
 
 class DummyHandler {
@@ -11,14 +10,35 @@ class DummyHandler {
                 inst = DummyHandler().apply {
                     categories.add(
                         Category(
-                            "Food & Drinks",
+                            "Favoriter",
                             mutableListOf(),
-                            R.drawable.restaurants_icon
+                            R.drawable.favorite_points_icon
+                        )
+                    )
+                    categories.add(
+                        Category(
+                            "Senaste",
+                            mutableListOf(),
+                            R.drawable.latest_points_icon
+                        )
+                    )
+                    categories.add(
+                        Category(
+                            "Bekvämligheter",
+                            mutableListOf(),
+                            R.drawable.charging_stations_icon
+                        )
+                    )
+                    categories.add(
+                        Category(
+                            "Mat&Dryck",
+                            mutableListOf(),
+                            R.drawable.local_dining_icon
                         ).apply {
                             subCategories.add(
                                 SubCategory(
-                                    "Food",
-                                    mutableListOf()
+                                    "Restauranger",
+                                    mutableListOf(), R.drawable.restaurants_small_icon
                                 ).apply {
                                     points.add(
                                         POIItem(
@@ -51,7 +71,7 @@ class DummyHandler {
                                 })
                             subCategories.add(
                                 SubCategory(
-                                    "Drinks",
+                                    "Pubar och barer",
                                     mutableListOf()
                                 ).apply {
                                     points.add(
@@ -85,7 +105,7 @@ class DummyHandler {
                                 })
                             subCategories.add(
                                 SubCategory(
-                                    "Fika",
+                                    "Caféer",
                                     mutableListOf()
                                 ).apply {
                                     points.add(
@@ -117,7 +137,111 @@ class DummyHandler {
                                         )
                                     )
                                 })
+                            subCategories.add(
+                                SubCategory(
+                                    "Glasställen",
+                                    mutableListOf()
+                                ).apply {
+                                    points.add(
+                                        POIItem(
+                                            "Conditori Cecil",
+                                            "I över 70 år har det bakats bullar, bröd och bakelser på detta konditori. Att detta är ett mycket poppis ställe bland både laholmare och turister är inte så svårt att förstå, här är det nybakta fikabrödet tillverkat med kärlek och lokala råvaror och alla är överens om att fikat är dagens viktigaste mål.",
+                                            Pair(56.513186400000016, 13.043843299999946)
+                                        )
+                                    )
+                                    points.add(
+                                        POIItem(
+                                            "Vilgots surdegsbageri",
+                                            "I centrala Våxtorp ligger Vilgots surdegsbageri - ett kafé & hantverksbageri med fokus på surdeg, närproducerad & ekologiskt. En mötesplats med återvunnen & konstnärlig inredning. Här bjuds det på fika, lättare lunch, event & yoga vissa kvällar i veckan.",
+                                            Pair(56.41702070000001, 13.119932300000015)
+                                        )
+                                    )
+                                    points.add(
+                                        POIItem(
+                                            "Ysby gamla Lanthandel",
+                                            "Ysby gamla Lanthandel är ett litet lantligt café med gammaldags charm. Hembakade kakor och nybryggt kaffe, mackor och annat gott. Fika här med en känsla av att fika hos ”farmor” eller ta med dig hem.",
+                                            Pair(56.492546, 13.1149287)
+                                        )
+                                    )
+                                    points.add(
+                                        POIItem(
+                                            "Sockerbagaren",
+                                            "Sockerbagaren i Skummeslöv är ett mysigt bageri och café bara ett stenkast ifrån stranden. Här erbjuds hembakade bullar, bröd, småkakor, kaffebröd, och smörgåsar. Det går även att beställa goda tårtor, köpa glass och kolonialvaror. I caféet kan du avnjuta en kopp kaffe tillsammans med något gott från butiken - eller varför inte köpa med en god kaka till fikat på stranden?",
+                                            Pair(56.46153979267341, 12.92140215986563)
+                                        )
+                                    )
+                                })
+                            subCategories.add(
+                                SubCategory(
+                                    "Picknickställen",
+                                    mutableListOf()
+                                ).apply {
+                                    points.add(
+                                        POIItem(
+                                            "Conditori Cecil",
+                                            "I över 70 år har det bakats bullar, bröd och bakelser på detta konditori. Att detta är ett mycket poppis ställe bland både laholmare och turister är inte så svårt att förstå, här är det nybakta fikabrödet tillverkat med kärlek och lokala råvaror och alla är överens om att fikat är dagens viktigaste mål.",
+                                            Pair(56.513186400000016, 13.043843299999946)
+                                        )
+                                    )
+                                    points.add(
+                                        POIItem(
+                                            "Vilgots surdegsbageri",
+                                            "I centrala Våxtorp ligger Vilgots surdegsbageri - ett kafé & hantverksbageri med fokus på surdeg, närproducerad & ekologiskt. En mötesplats med återvunnen & konstnärlig inredning. Här bjuds det på fika, lättare lunch, event & yoga vissa kvällar i veckan.",
+                                            Pair(56.41702070000001, 13.119932300000015)
+                                        )
+                                    )
+                                    points.add(
+                                        POIItem(
+                                            "Ysby gamla Lanthandel",
+                                            "Ysby gamla Lanthandel är ett litet lantligt café med gammaldags charm. Hembakade kakor och nybryggt kaffe, mackor och annat gott. Fika här med en känsla av att fika hos ”farmor” eller ta med dig hem.",
+                                            Pair(56.492546, 13.1149287)
+                                        )
+                                    )
+                                    points.add(
+                                        POIItem(
+                                            "Sockerbagaren",
+                                            "Sockerbagaren i Skummeslöv är ett mysigt bageri och café bara ett stenkast ifrån stranden. Här erbjuds hembakade bullar, bröd, småkakor, kaffebröd, och smörgåsar. Det går även att beställa goda tårtor, köpa glass och kolonialvaror. I caféet kan du avnjuta en kopp kaffe tillsammans med något gott från butiken - eller varför inte köpa med en god kaka till fikat på stranden?",
+                                            Pair(56.46153979267341, 12.92140215986563)
+                                        )
+                                    )
+                                })
+
                         })
+                    categories.add(
+                        Category(
+                            "Badplatser",
+                            mutableListOf(),
+                            R.drawable.beaches_icon
+                        )
+                    )
+                    categories.add(
+                        Category(
+                            "Aktiviteter",
+                            mutableListOf(),
+                            R.drawable.hiking_areas_icon
+                        )
+                    )
+                    categories.add(
+                        Category(
+                            "Natur",
+                            mutableListOf(),
+                            R.drawable.nature_icon
+                        )
+                    )
+                    categories.add(
+                        Category(
+                            "Kultur&Historia",
+                            mutableListOf(),
+                            R.drawable.culture_icon
+                        )
+                    )
+                    categories.add(
+                        Category(
+                            "Samlingar",
+                            mutableListOf(),
+                            R.drawable.collections_icon
+                        )
+                    )
                 }
             }
             return inst as DummyHandler
@@ -133,7 +257,7 @@ data class Category(
     var iconRes: Int? = null
 )
 
-data class SubCategory(var title: String, var points: MutableList<POIItem>)
+data class SubCategory(var title: String, var points: MutableList<POIItem>, var iconRes: Int = R.drawable.restaurants_small_icon)
 data class POIItem(
     var title: String,
     var description: String,

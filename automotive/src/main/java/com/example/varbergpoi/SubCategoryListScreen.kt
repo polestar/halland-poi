@@ -63,7 +63,7 @@ class SubCategoryListScreen(
                         CarIcon.Builder(
                             IconCompat.createWithResource(
                                 carContext,
-                                R.drawable.restaurants_icon
+                                subCat.iconRes
                             )
                         ).build()
                     ).build()
@@ -71,41 +71,41 @@ class SubCategoryListScreen(
                 .build()
         }
 //         Some hosts may allow more items in the list than others, so create more.
-        if (carContext.carAppApiLevel > CarAppApiLevels.LEVEL_1) {
-            val listLimit = Math.min(
-                MAX_LIST_ITEMS,
-                carContext.getCarService(ConstraintManager::class.java).getContentLimit(
-                    ConstraintManager.CONTENT_LIMIT_TYPE_LIST
-                )
-            )
-            for (i in 2..listLimit) {
-                // For row text, set text variants that fit best in different screen sizes.
-                val secondTextStr = ("Second line text")
-                val secondText = CarText.Builder(
-                    "================= $secondTextStr ================"
-                )
-                    .addVariant(
-                        "--------------------- " + secondTextStr
-                                + " ----------------------"
-                    )
-                    .addVariant(secondTextStr)
-                    .build()
-                val onClickText = "Clicked row: $i"
-                val rowBuilder = Row.Builder()
-                    .setOnClickListener { onClick(onClickText) }
-                    .setTitle(
-                        "Title prefix $i"
-                    )
-                if (i % 2 == 0) {
-                    rowBuilder.addText("Long line text")
-                } else {
-                    rowBuilder
-                        .addText("First Line text")
-                        .addText(secondText)
-                }
-                listBuilder.addItem(rowBuilder.build())
-            }
-        }
+//        if (carContext.carAppApiLevel > CarAppApiLevels.LEVEL_1) {
+//            val listLimit = Math.min(
+//                MAX_LIST_ITEMS,
+//                carContext.getCarService(ConstraintManager::class.java).getContentLimit(
+//                    ConstraintManager.CONTENT_LIMIT_TYPE_LIST
+//                )
+//            )
+//            for (i in 2..listLimit) {
+//                // For row text, set text variants that fit best in different screen sizes.
+//                val secondTextStr = ("Second line text")
+//                val secondText = CarText.Builder(
+//                    "================= $secondTextStr ================"
+//                )
+//                    .addVariant(
+//                        "--------------------- " + secondTextStr
+//                                + " ----------------------"
+//                    )
+//                    .addVariant(secondTextStr)
+//                    .build()
+//                val onClickText = "Clicked row: $i"
+//                val rowBuilder = Row.Builder()
+//                    .setOnClickListener { onClick(onClickText) }
+//                    .setTitle(
+//                        "Title prefix $i"
+//                    )
+//                if (i % 2 == 0) {
+//                    rowBuilder.addText("Long line text")
+//                } else {
+//                    rowBuilder
+//                        .addText("First Line text")
+//                        .addText(secondText)
+//                }
+//                listBuilder.addItem(rowBuilder.build())
+//            }
+//        }
         val settings = Action.Builder()
             .setTitle(
                 "Action title"
