@@ -28,6 +28,8 @@ import androidx.core.location.LocationListenerCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import com.example.varbergpoi.dummydata.POIItem
+import androidx.car.app.model.Metadata;
+import androidx.car.app.model.PlaceMarker
 
 
 class PlaceListScreen(carContext: CarContext, var items: List<POIItem> = listOf()) :
@@ -103,6 +105,15 @@ class PlaceListScreen(carContext: CarContext, var items: List<POIItem> = listOf(
             listBuilder.addItem(
                 Row.Builder().setOnClickListener { }.setTitle(item.title).addText(
                     distanceText
+                ).setMetadata(
+                    Metadata.Builder().setPlace(
+                        Place.Builder(
+                            CarLocation.create(
+                                item.coordinates.first,
+                                item.coordinates.second
+                            )
+                        ).setMarker(PlaceMarker.Builder().build()).build()
+                    ).build()
                 ).build()
             )
         }
@@ -110,7 +121,7 @@ class PlaceListScreen(carContext: CarContext, var items: List<POIItem> = listOf(
             .setItemList(
                 listBuilder.build()
             )
-            .setTitle(carContext.getString(R.string.place_list_template_demo_title))
+            .setTitle(carContext.getString(R.string.place_list_title))
             .setHeaderAction(Action.BACK)
             .setCurrentLocationEnabled(mHasPermissionLocation)
         if (mCurrentLocation != null) {

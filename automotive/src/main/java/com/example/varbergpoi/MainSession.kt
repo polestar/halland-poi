@@ -37,16 +37,6 @@ class MainScreen(carContext: CarContext) : Screen(carContext) {
         val dHandler = DummyHandler.getInstance()
 
         val gridItemListBuilder = ItemList.Builder()
-        val poiData = listOf(
-            PoiData("Restaurants", R.drawable.restaurants_icon),
-            PoiData("Charging stations", R.drawable.charging_stations_icon),
-            PoiData("Hiking areas", R.drawable.hiking_areas_icon),
-            PoiData("Beaches", R.drawable.beaches_icon),
-            PoiData("Hotels", R.drawable.hotels_icon),
-            PoiData("Parking spaces", R.drawable.parking_spaces_icon),
-            PoiData("Bike rental", R.drawable.bike_rental_icon),
-            PoiData("Museums", R.drawable.museums_icon)
-        )
 
         dHandler.categories.forEach { data ->
             val gridItemBuilder = GridItem.Builder()
@@ -75,7 +65,7 @@ class MainScreen(carContext: CarContext) : Screen(carContext) {
         }
 
         return GridTemplate.Builder()
-            .setTitle("Points of interest")
+            .setTitle("Halland points of interests")
             .setSingleList(gridItemListBuilder.build())
             .build()
     }

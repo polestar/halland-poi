@@ -31,7 +31,7 @@ class DummyHandler {
                     )
                     categories.add(
                         Category(
-                            "Mat&Dryck",
+                            "Mat & Dryck",
                             mutableListOf(),
                             R.drawable.local_dining_icon
                         ).apply {

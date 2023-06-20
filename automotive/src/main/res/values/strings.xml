@@ -9,7 +9,7 @@
 
     <string name="grant_location_permission_toast_msg">Grant location Permission to see current location</string>
     <string name="browse_places_title">Browse Places</string>
-    <string name="place_list_template_demo_title">Place List Template Demo</string>
+    <string name="place_list_title">Restauranger</string>
     <string name="lorem_ipsum">Place List Template Demo</string>
     <string name="ok">OK</string>
     <string name="skip">Skip</string>
