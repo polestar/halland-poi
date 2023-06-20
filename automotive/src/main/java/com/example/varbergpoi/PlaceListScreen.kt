@@ -87,11 +87,13 @@ class PlaceListScreen(carContext: CarContext, var items: List<POIItem> = listOf(
     override fun onGetTemplate(): Template {
         val listBuilder = ItemList.Builder()
         items.forEach { item ->
+            var results = floatArrayOf(0f)
+            Location.distanceBetween(mCurrentLocation?.latitude ?: 0.0, mCurrentLocation?.longitude ?: 0.0, item.coordinates.first, item.coordinates.second, results)
             val distanceText = SpannableString(" ").apply {
                 setSpan(
                     DistanceSpan.create(
                         Distance.create(
-                            10.0, // TODO: Set actual distance
+                            results[0]/1000.0,
                             UNIT_KILOMETERS
                         )
                     ), 0, 1, SPAN_INCLUSIVE_INCLUSIVE
