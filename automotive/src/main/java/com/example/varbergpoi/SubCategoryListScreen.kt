@@ -59,13 +59,14 @@ class SubCategoryListScreen(
                         ParkedOnlyOnClickListener.create {
 
                         })
-                    .setTitle(subCat.title).setImage(
+                    .setTitle(subCat.title)
+                    .setImage(
                         CarIcon.Builder(
                             IconCompat.createWithResource(
                                 carContext,
                                 subCat.iconRes
                             )
-                        ).build()
+                        ).build(), Row.IMAGE_TYPE_ICON
                     ).build()
             )
                 .build()
