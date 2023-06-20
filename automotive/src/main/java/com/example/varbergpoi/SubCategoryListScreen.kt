@@ -51,15 +51,15 @@ class SubCategoryListScreen(
         subCategories.forEach { subCat ->
             listBuilder.addItem(
                 Row.Builder().setOnClickListener { screenManager.push(PlaceListScreen(carContext, subCat.points, subCat.title)) }
-                    .setTitle(subCat.title)
-                    .setImage(
-                        CarIcon.Builder(
-                            IconCompat.createWithResource(
-                                carContext,
-                                subCat.iconRes
-                            )
-                        ).build(), Row.IMAGE_TYPE_ICON
-                    ).build()
+                    .setTitle(subCat.title).build()
+//                    .setImage(
+//                        CarIcon.Builder(
+//                            IconCompat.createWithResource(
+//                                carContext,
+//                                subCat.iconRes
+//                            )
+//                        ).build(), Row.IMAGE_TYPE_ICON
+//                    ).build()
             )
                 .build()
         }
@@ -89,9 +89,9 @@ class SubCategoryListScreen(
             .build()
     }
 
-    private fun onClick(text: String) {
-        CarToast.makeText(carContext, text, CarToast.LENGTH_LONG).show()
-    }
+//    private fun onClick(text: String) {
+//        CarToast.makeText(carContext, text, CarToast.LENGTH_LONG).show()
+//    }
 
     companion object {
         private const val MAX_LIST_ITEMS = 100

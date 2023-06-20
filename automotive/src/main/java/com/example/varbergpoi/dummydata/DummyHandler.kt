@@ -38,7 +38,8 @@ class DummyHandler {
                             subCategories.add(
                                 SubCategory(
                                     "Restauranger",
-                                    mutableListOf(), R.drawable.restaurants_small_icon
+                                    mutableListOf()
+//                                    , R.drawable.restaurants_small_icon
                                 ).apply {
                                     points.add(
                                         POIItem(
@@ -257,7 +258,8 @@ data class Category(
     var iconRes: Int? = null
 )
 
-data class SubCategory(var title: String, var points: MutableList<POIItem>, var iconRes: Int = R.drawable.restaurants_small_icon)
+data class SubCategory(var title: String, var points: MutableList<POIItem>)
+//, var iconRes: Int = R.drawable.restaurants_small_icon
 data class POIItem(
     var title: String,
     var description: String,
