@@ -8,12 +8,17 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
 import android.os.HandlerThread
+import android.text.SpannableString
+import android.text.Spanned.SPAN_INCLUSIVE_INCLUSIVE
 import androidx.annotation.Nullable
 import androidx.car.app.CarContext
 import androidx.car.app.CarToast
 import androidx.car.app.Screen
 import androidx.car.app.model.Action
 import androidx.car.app.model.CarLocation
+import androidx.car.app.model.Distance
+import androidx.car.app.model.Distance.UNIT_KILOMETERS
+import androidx.car.app.model.DistanceSpan
 import androidx.car.app.model.ItemList
 import androidx.car.app.model.Place
 import androidx.car.app.model.PlaceListMapTemplate
@@ -82,7 +87,22 @@ class PlaceListScreen(carContext: CarContext, var items: List<POIItem> = listOf(
     override fun onGetTemplate(): Template {
         val listBuilder = ItemList.Builder()
         items.forEach { item ->
-            listBuilder.addItem(Row.Builder().setOnClickListener { }.setTitle(item.title).build())
+            val distanceText = SpannableString(" ").apply {
+                setSpan(
+                    DistanceSpan.create(
+                        Distance.create(
+                            10.0, // TODO: Set actual distance
+                            UNIT_KILOMETERS
+                        )
+                    ), 0, 1, SPAN_INCLUSIVE_INCLUSIVE
+                )
+            }
+
+            listBuilder.addItem(
+                Row.Builder().setOnClickListener { }.setTitle(item.title).addText(
+                    distanceText
+                ).build()
+            )
         }
         val builder = PlaceListMapTemplate.Builder()
             .setItemList(
