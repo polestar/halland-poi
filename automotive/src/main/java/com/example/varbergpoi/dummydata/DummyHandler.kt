@@ -11,12 +11,13 @@ class DummyHandler {
                 inst = DummyHandler().apply {
                     categories.add(
                         Category(
-                            R.string.category_food_drinks_title,
-                            mutableListOf()
+                            "Food & Drinks",
+                            mutableListOf(),
+                            R.drawable.restaurants_icon
                         ).apply {
                             subCategories.add(
                                 SubCategory(
-                                    R.string.subcategory_food_title,
+                                    "Food",
                                     mutableListOf()
                                 ).apply {
                                     points.add(
@@ -50,7 +51,7 @@ class DummyHandler {
                                 })
                             subCategories.add(
                                 SubCategory(
-                                    R.string.subcategory_drinks_title,
+                                    "Drinks",
                                     mutableListOf()
                                 ).apply {
                                     points.add(
@@ -84,7 +85,7 @@ class DummyHandler {
                                 })
                             subCategories.add(
                                 SubCategory(
-                                    R.string.subcategory_fika_title,
+                                    "Fika",
                                     mutableListOf()
                                 ).apply {
                                     points.add(
@@ -126,8 +127,13 @@ class DummyHandler {
     var categories: MutableList<Category> = mutableListOf()
 }
 
-data class Category(var titleRes: Int, var subCategories: MutableList<SubCategory>)
-data class SubCategory(var titleRes: Int, var points: MutableList<POIItem>)
+data class Category(
+    var title: String,
+    var subCategories: MutableList<SubCategory>,
+    var iconRes: Int? = null
+)
+
+data class SubCategory(var title: String, var points: MutableList<POIItem>)
 data class POIItem(
     var title: String,
     var description: String,

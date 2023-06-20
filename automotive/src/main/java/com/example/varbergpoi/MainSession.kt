@@ -22,7 +22,7 @@ class MainSession : Session() {
 
 class MainScreen(carContext: CarContext) : Screen(carContext) {
     override fun onGetTemplate(): Template {
-        printDummyData()
+        val dHandler = DummyHandler.getInstance()
 
         val gridItemListBuilder = ItemList.Builder()
         val poiData = listOf(
@@ -36,13 +36,16 @@ class MainScreen(carContext: CarContext) : Screen(carContext) {
             PoiData("Museums", R.drawable.museums_icon)
         )
 
-        for (data in poiData) {
+        dHandler.categories.forEach { data ->
             val gridItemBuilder = GridItem.Builder()
                 .setTitle(data.title)
-                .setOnClickListener { onIconClicked() }
+                .setOnClickListener {
+                    if(data.subCategories.isNotEmpty())
+                        screenManager.push(SubCategoryListScreen(carContext, data.subCategories))
+                }
                 .setImage(
                     CarIcon.Builder(
-                        IconCompat.createWithResource(carContext, data.iconResId)
+                        IconCompat.createWithResource(carContext, data.iconRes ?: R.drawable.restaurants_icon)
                     ).build()
                 )
                 .build()
@@ -54,23 +57,6 @@ class MainScreen(carContext: CarContext) : Screen(carContext) {
             .setTitle("Points of interest")
             .setSingleList(gridItemListBuilder.build())
             .build()
-    }
-    private fun printDummyData(){
-        val dHandler = DummyHandler.getInstance()
-        dHandler.categories.forEach { category ->
-            Log.d("catlist", carContext.getString(category.titleRes))
-            category.subCategories.forEach { subCat ->
-                Log.d("catlist", "--"+carContext.getString(subCat.titleRes))
-                subCat.points.forEach { point ->
-                    Log.d("catlist", "----$point")
-                }
-            }
-        }
-    }
-
-    private fun onIconClicked() {
-        screenManager.push(SubCategoryListScreen(carContext))
-//        screenManager.push(PlaceListScreen(carContext))
     }
 
     // Data class to hold POI information

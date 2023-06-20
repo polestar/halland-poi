@@ -58,7 +58,7 @@ class SubCategoryListScreen(
                         ParkedOnlyOnClickListener.create {
 
                         })
-                    .setTitle(carContext.getString(subCat.titleRes)).setImage(
+                    .setTitle(subCat.title).setImage(
                         CarIcon.Builder(
                             IconCompat.createWithResource(
                                 carContext,
