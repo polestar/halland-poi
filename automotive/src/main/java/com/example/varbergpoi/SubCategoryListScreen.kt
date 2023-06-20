@@ -20,17 +20,13 @@ package com.example.varbergpoi
 import androidx.car.app.CarContext
 import androidx.car.app.CarToast
 import androidx.car.app.Screen
-import androidx.car.app.constraints.ConstraintManager
 import androidx.car.app.model.Action
 import androidx.car.app.model.ActionStrip
 import androidx.car.app.model.CarIcon
-import androidx.car.app.model.CarText
 import androidx.car.app.model.ItemList
 import androidx.car.app.model.ListTemplate
-import androidx.car.app.model.ParkedOnlyOnClickListener
 import androidx.car.app.model.Row
 import androidx.car.app.model.Template
-import androidx.car.app.versioning.CarAppApiLevels
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import com.example.varbergpoi.dummydata.SubCategory
@@ -54,7 +50,7 @@ class SubCategoryListScreen(
         val listBuilder = ItemList.Builder()
         subCategories.forEach { subCat ->
             listBuilder.addItem(
-                Row.Builder().setOnClickListener { screenManager.push(PlaceListScreen(carContext, subCat.points)) }
+                Row.Builder().setOnClickListener { screenManager.push(PlaceListScreen(carContext, subCat.points, subCat.title)) }
                     .setTitle(subCat.title)
                     .setImage(
                         CarIcon.Builder(
@@ -67,42 +63,7 @@ class SubCategoryListScreen(
             )
                 .build()
         }
-//         Some hosts may allow more items in the list than others, so create more.
-//        if (carContext.carAppApiLevel > CarAppApiLevels.LEVEL_1) {
-//            val listLimit = Math.min(
-//                MAX_LIST_ITEMS,
-//                carContext.getCarService(ConstraintManager::class.java).getContentLimit(
-//                    ConstraintManager.CONTENT_LIMIT_TYPE_LIST
-//                )
-//            )
-//            for (i in 2..listLimit) {
-//                // For row text, set text variants that fit best in different screen sizes.
-//                val secondTextStr = ("Second line text")
-//                val secondText = CarText.Builder(
-//                    "================= $secondTextStr ================"
-//                )
-//                    .addVariant(
-//                        "--------------------- " + secondTextStr
-//                                + " ----------------------"
-//                    )
-//                    .addVariant(secondTextStr)
-//                    .build()
-//                val onClickText = "Clicked row: $i"
-//                val rowBuilder = Row.Builder()
-//                    .setOnClickListener { onClick(onClickText) }
-//                    .setTitle(
-//                        "Title prefix $i"
-//                    )
-//                if (i % 2 == 0) {
-//                    rowBuilder.addText("Long line text")
-//                } else {
-//                    rowBuilder
-//                        .addText("First Line text")
-//                        .addText(secondText)
-//                }
-//                listBuilder.addItem(rowBuilder.build())
-//            }
-//        }
+
         val settings = Action.Builder()
             .setTitle(
                 "Action title"

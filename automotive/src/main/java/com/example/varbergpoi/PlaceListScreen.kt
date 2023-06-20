@@ -32,7 +32,7 @@ import androidx.car.app.model.Metadata;
 import androidx.car.app.model.PlaceMarker
 
 
-class PlaceListScreen(carContext: CarContext, var items: List<POIItem> = listOf()) :
+class PlaceListScreen(carContext: CarContext, private val items: List<POIItem> = listOf(), private val screenTitle: String) :
     Screen(carContext) {
     val mLocationListener: LocationListenerCompat
     val mLocationUpdateHandlerThread: HandlerThread
@@ -95,7 +95,7 @@ class PlaceListScreen(carContext: CarContext, var items: List<POIItem> = listOf(
                 setSpan(
                     DistanceSpan.create(
                         Distance.create(
-                            results[0]/1000.0,
+                            results[0] / 1000.0,
                             UNIT_KILOMETERS
                         )
                     ), 0, 1, SPAN_INCLUSIVE_INCLUSIVE
@@ -117,18 +117,22 @@ class PlaceListScreen(carContext: CarContext, var items: List<POIItem> = listOf(
                 ).build()
             )
         }
+
         val builder = PlaceListMapTemplate.Builder()
             .setItemList(
                 listBuilder.build()
             )
-            .setTitle(carContext.getString(R.string.place_list_title))
+            .setTitle(screenTitle)
             .setHeaderAction(Action.BACK)
             .setCurrentLocationEnabled(mHasPermissionLocation)
+
         if (mCurrentLocation != null) {
             builder.setAnchor(Place.Builder(CarLocation.create(mCurrentLocation!!)).build())
         }
+
         return builder.build()
     }
+
 
     companion object {
         private const val LOCATION_UPDATE_MIN_INTERVAL_MILLIS = 1000
