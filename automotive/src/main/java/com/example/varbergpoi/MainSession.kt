@@ -41,7 +41,7 @@ class MainScreen(carContext: CarContext) : Screen(carContext) {
                 .setTitle(data.title)
                 .setOnClickListener {
                     if(data.subCategories.isNotEmpty())
-                        screenManager.push(SubCategoryListScreen(carContext, data.subCategories))
+                        screenManager.push(SubCategoryListScreen(carContext, data.title, data.subCategories))
                 }
                 .setImage(
                     CarIcon.Builder(

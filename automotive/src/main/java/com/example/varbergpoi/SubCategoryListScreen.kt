@@ -42,6 +42,7 @@ import com.example.varbergpoi.dummydata.SubCategory
  */
 class SubCategoryListScreen(
     carContext: CarContext,
+    private val screenTitle: String,
     private val subCategories: List<SubCategory> = listOf()
 ) : Screen(carContext),
     DefaultLifecycleObserver {
@@ -120,7 +121,7 @@ class SubCategoryListScreen(
             .build()
         return ListTemplate.Builder()
             .setSingleList(listBuilder.build())
-            .setTitle("Mat & Dryck")
+            .setTitle(screenTitle)
             .setHeaderAction(Action.BACK)
             .setActionStrip(
                 ActionStrip.Builder()
