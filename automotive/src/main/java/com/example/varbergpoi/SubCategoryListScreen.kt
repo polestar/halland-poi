@@ -69,12 +69,7 @@ class SubCategoryListScreen(
                 " "
             )
             .setOnClickListener {
-//                CarToast.makeText(
-//                    carContext,
-//                    "Settings toast Message",
-//                    CarToast.LENGTH_LONG
-//                )
-//                    .show()
+                // TODO: Show settings message
             }
             .build()
         return ListTemplate.Builder()
@@ -88,10 +83,6 @@ class SubCategoryListScreen(
             )
             .build()
     }
-
-//    private fun onClick(text: String) {
-//        CarToast.makeText(carContext, text, CarToast.LENGTH_LONG).show()
-//    }
 
     companion object {
         private const val MAX_LIST_ITEMS = 100
