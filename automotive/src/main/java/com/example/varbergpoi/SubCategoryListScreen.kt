@@ -50,31 +50,31 @@ class SubCategoryListScreen(
         val listBuilder = ItemList.Builder()
         subCategories.forEach { subCat ->
             listBuilder.addItem(
-                Row.Builder().setOnClickListener { screenManager.push(PlaceListScreen(carContext, subCat.points, subCat.title)) }
+                Row.Builder().setBrowsable(true).setOnClickListener {
+                    screenManager.push(
+                        PlaceListScreen(
+                            carContext,
+                            subCat.points,
+                            subCat.title
+                        )
+                    )
+                }
                     .setTitle(subCat.title).build()
-//                    .setImage(
-//                        CarIcon.Builder(
-//                            IconCompat.createWithResource(
-//                                carContext,
-//                                subCat.iconRes
-//                            )
-//                        ).build(), Row.IMAGE_TYPE_ICON
-//                    ).build()
             )
                 .build()
         }
 
         val settings = Action.Builder()
             .setTitle(
-                "Action title"
+                " "
             )
             .setOnClickListener {
-                CarToast.makeText(
-                    carContext,
-                    "Settings toast Message",
-                    CarToast.LENGTH_LONG
-                )
-                    .show()
+//                CarToast.makeText(
+//                    carContext,
+//                    "Settings toast Message",
+//                    CarToast.LENGTH_LONG
+//                )
+//                    .show()
             }
             .build()
         return ListTemplate.Builder()
