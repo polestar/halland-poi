@@ -231,7 +231,7 @@ class DummyHandler {
                     )
                     categories.add(
                         Category(
-                            "Kultur&Historia",
+                            "Kultur & Historia",
                             mutableListOf(),
                             R.drawable.culture_icon
                         )
