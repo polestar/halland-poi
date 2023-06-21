@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Varberg POI</string>
+    <string name="app_name">Halland points of interests</string>
     <string name="title_activity_main">MainActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
