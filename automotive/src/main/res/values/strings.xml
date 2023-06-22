@@ -11,8 +11,8 @@
     <string name="browse_places_title">Browse Places</string>
     <string name="place_list_title">Restauranger</string>
     <string name="lorem_ipsum">Place List Template Demo</string>
-    <string name="ok">Okej</string>
-    <string name="skip">Hoppa över</string>
+    <string name="ok">Godkänn</string>
+    <string name="skip">Avböj</string>
     <string name="location_permission_message">För att du enkelt ska kunna se avstånd till platser du är intresserad av att besöka rekommenderar vi att du tillåter att dela din position.</string>
 
 </resources>
