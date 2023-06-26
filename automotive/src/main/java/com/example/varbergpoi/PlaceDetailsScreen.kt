@@ -78,8 +78,6 @@ class PlaceDetailsScreen constructor(carContext: CarContext) :
         val mDetails = listOf(
             "Detail one",
             "Detail two",
-            "Detail three",
-            "Detail four"
         )
 
         // If we don't have any places yet, show a loading progress indicator.
@@ -93,8 +91,6 @@ class PlaceDetailsScreen constructor(carContext: CarContext) :
             val addressLines = listOf(
                 "123 Main Street",
                 "456 Elm Avenue",
-                "789 Oak Drive",
-                "10 Pine Lane"
             )
             for (line in addressLines) {
                 row1Builder.addText(line)
