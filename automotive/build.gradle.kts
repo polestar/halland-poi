@@ -25,7 +25,7 @@ android {
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.example.varbergpoi"
+        applicationId = "com.polestar.hallandpoi.qa.android"
         minSdk = 29
         targetSdk = 33
         versionCode = 1
