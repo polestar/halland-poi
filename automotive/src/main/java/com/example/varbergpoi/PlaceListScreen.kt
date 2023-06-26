@@ -32,7 +32,11 @@ import androidx.car.app.model.Metadata;
 import androidx.car.app.model.PlaceMarker
 
 
-class PlaceListScreen(carContext: CarContext, private val items: List<POIItem> = listOf(), private val screenTitle: String) :
+class PlaceListScreen(
+    carContext: CarContext,
+    private val items: List<POIItem> = listOf(),
+    private val screenTitle: String
+) :
     Screen(carContext) {
     val mLocationListener: LocationListenerCompat
     val mLocationUpdateHandlerThread: HandlerThread
@@ -90,7 +94,13 @@ class PlaceListScreen(carContext: CarContext, private val items: List<POIItem> =
         val listBuilder = ItemList.Builder()
         items.forEach { item ->
             var results = floatArrayOf(0f)
-            Location.distanceBetween(mCurrentLocation?.latitude ?: 0.0, mCurrentLocation?.longitude ?: 0.0, item.coordinates.first, item.coordinates.second, results)
+            Location.distanceBetween(
+                mCurrentLocation?.latitude ?: 0.0,
+                mCurrentLocation?.longitude ?: 0.0,
+                item.coordinates.first,
+                item.coordinates.second,
+                results
+            )
             val distanceText = SpannableString(" ").apply {
                 setSpan(
                     DistanceSpan.create(
@@ -103,7 +113,15 @@ class PlaceListScreen(carContext: CarContext, private val items: List<POIItem> =
             }
 
             listBuilder.addItem(
-                Row.Builder().setOnClickListener { }.setTitle(item.title).addText(
+                Row.Builder().setOnClickListener {
+//                    screenManager.push(PlaceDetailsScreen(carContext))
+//                    CarToast.makeText(
+//                        carContext,
+//                        "Go to",
+//                        CarToast.LENGTH_LONG
+//                    )
+//                        .show()
+                }.setTitle(item.title).addText(
                     distanceText
                 ).setMetadata(
                     Metadata.Builder().setPlace(
