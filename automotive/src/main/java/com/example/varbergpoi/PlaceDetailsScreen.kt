@@ -54,7 +54,7 @@ import java.util.Locale
 
 /** A screen that displays a the details for a given place.  */
 //class PlaceDetailsScreen private constructor(carContext: CarContext, place: PlaceInfo) :
-class PlaceDetailsScreen private constructor(carContext: CarContext) :
+class PlaceDetailsScreen constructor(carContext: CarContext) :
     Screen(carContext),
     DefaultLifecycleObserver {
 //    private val mPlace: PlaceInfo

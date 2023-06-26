@@ -114,7 +114,7 @@ class PlaceListScreen(
 
             listBuilder.addItem(
                 Row.Builder().setOnClickListener {
-//                    screenManager.push(PlaceDetailsScreen(carContext))
+                    screenManager.push(PlaceDetailsScreen(carContext))
 //                    CarToast.makeText(
 //                        carContext,
 //                        "Go to",
