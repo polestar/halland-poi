@@ -1,7 +1,5 @@
 package com.example.varbergpoi
 
-//import androidx.car.app.sample.showcase.common.R
-
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.content.pm.PackageManager
@@ -115,12 +113,6 @@ class PlaceListScreen(
             listBuilder.addItem(
                 Row.Builder().setOnClickListener {
                     screenManager.push(PlaceDetailsScreen(carContext))
-//                    CarToast.makeText(
-//                        carContext,
-//                        "Go to",
-//                        CarToast.LENGTH_LONG
-//                    )
-//                        .show()
                 }.setTitle(item.title).addText(
                     distanceText
                 ).setMetadata(
