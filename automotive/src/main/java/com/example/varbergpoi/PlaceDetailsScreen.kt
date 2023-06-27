@@ -10,7 +10,6 @@ import android.text.SpannableString
 import android.util.Log
 import androidx.car.app.CarContext
 import androidx.car.app.CarToast
-import androidx.car.app.HostException
 import androidx.car.app.Screen
 import androidx.car.app.model.Action
 import androidx.car.app.model.CarColor
@@ -109,7 +108,10 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
                     .setTitle("Navigate")
                     .setOnClickListener { onClickNavigate() }
                     .build())
+
+            //TODO: When favoriting an item, add it to the "favorites" list in DummyHandler
         }
+
         return PaneTemplate.Builder(paneBuilder.build())
             .setTitle(item.title)
             .setHeaderAction(Action.BACK)

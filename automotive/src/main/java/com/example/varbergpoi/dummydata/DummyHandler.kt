@@ -248,7 +248,7 @@ class DummyHandler {
             return inst as DummyHandler
         }
     }
-
+    var favorites: MutableList<POIItem> = mutableListOf()
     var categories: MutableList<Category> = mutableListOf()
 }
 

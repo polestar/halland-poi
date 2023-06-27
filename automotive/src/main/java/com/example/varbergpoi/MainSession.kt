@@ -63,6 +63,10 @@ class MainScreen(carContext: CarContext) : Screen(carContext) {
 
             gridItemListBuilder.addItem(gridItemBuilder)
         }
+        if(dHandler.favorites.isNotEmpty()) {
+            //TODO: Create new favorite category to show here
+            //TODO: In on click forward dHandler.favorites to PlaceListScreen
+        }
 
         return GridTemplate.Builder()
             .setTitle("Halland points of interests")
