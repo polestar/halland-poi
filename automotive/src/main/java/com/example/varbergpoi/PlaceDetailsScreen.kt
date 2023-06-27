@@ -116,25 +116,33 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
     }
 
     private fun onClickNavigate() {
-        val latitude = item.coordinates.first
-        val longitude = item.coordinates.second
+//        val latitude = item.coordinates.first
+//        val longitude = item.coordinates.second
+        val latitude = 57.78305319672344
+        val longitude = 12.043458128835622
 
         val mapIntentUri = Uri.parse("google.navigation:q=$latitude,$longitude")
         val mapIntent = Intent(Intent.ACTION_VIEW, mapIntentUri)
         mapIntent.setPackage("com.google.android.apps.maps")
 
         try {
-            carContext.startActivity(mapIntent)
+            if (mapIntent.resolveActivity(carContext.packageManager) != null) {
+                carContext.startActivity(mapIntent)
+            } else {
+                CarToast.makeText(
+                    carContext,
+                    "Google Maps is not installed",
+                    CarToast.LENGTH_LONG
+                ).show()
+            }
         } catch (e: Exception) {
             CarToast.makeText(
                 carContext,
-                "Failure starting navigation",
+                "Failure starting navigation: $latitude, $longitude",
                 CarToast.LENGTH_LONG
             ).show()
         }
     }
-
-
 
     companion object {
         private const val FULL_STAR = "\u2605"
