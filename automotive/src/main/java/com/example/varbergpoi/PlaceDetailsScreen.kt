@@ -1,6 +1,5 @@
 package com.example.varbergpoi
 
-import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.location.Address
@@ -25,7 +24,7 @@ import androidx.lifecycle.LifecycleOwner
 import java.util.Locale
 
 /** A screen that displays a the details for a given place.  */
-class PlaceDetailsScreen constructor(carContext: CarContext) :
+class PlaceDetailsScreen(carContext: CarContext, private val title: String) :
     Screen(carContext),
     DefaultLifecycleObserver {
 
@@ -47,6 +46,7 @@ class PlaceDetailsScreen constructor(carContext: CarContext) :
         if (mDetails == null) {
             paneBuilder.setLoading(true)
         } else {
+            //Row One
             val row1Builder = Row.Builder().setTitle("Address")
 
             // Add the address, split in multiple lines.
@@ -65,7 +65,9 @@ class PlaceDetailsScreen constructor(carContext: CarContext) :
             }
             paneBuilder.addRow(row1Builder.build())
             var hasSecondRow = false
-            val row2Builder = Row.Builder().setTitle("Phone Number and Rating")
+
+            //Row Two
+            val row2Builder = Row.Builder().setTitle("Telefonnummer och Betyg")
 
             // Add the phone number.
             val phoneNumber: String = "+46 700 51 55 36"
@@ -84,6 +86,20 @@ class PlaceDetailsScreen constructor(carContext: CarContext) :
                 paneBuilder.addRow(row2Builder.build())
             }
 
+            //Row Three
+            val row3Builder = Row.Builder().setTitle("Beskrivning")
+
+            // Add the phone number.
+            val phoneNumber2: String =
+                "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"
+            if (phoneNumber2 != null) {
+                hasSecondRow = true
+                row3Builder.addText(phoneNumber2)
+            }
+            if (hasSecondRow) {
+                paneBuilder.addRow(row3Builder.build())
+            }
+
             // Add a button with a navigate action.
             paneBuilder.addAction(
                 Action.Builder()
@@ -92,7 +108,7 @@ class PlaceDetailsScreen constructor(carContext: CarContext) :
                     .build())
         }
         return PaneTemplate.Builder(paneBuilder.build())
-            .setTitle("Vald Plats")
+            .setTitle(title)
             .setHeaderAction(Action.BACK)
             .build()
     }
@@ -117,9 +133,8 @@ class PlaceDetailsScreen constructor(carContext: CarContext) :
         private const val HALF_STAR = "\u00BD"
 
         /** Returns a screen showing the details of the given [PlaceInfo].  */
-//        fun create(carContext: CarContext, place: PlaceInfo): PlaceDetailsScreen {
-        fun create(carContext: CarContext): PlaceDetailsScreen {
-            return PlaceDetailsScreen(carContext,)
+        fun create(carContext: CarContext, title: String): PlaceDetailsScreen {
+            return PlaceDetailsScreen(carContext, title)
         }
 
         private fun getAddressLines(address: Address): List<CharSequence> {
