@@ -24,7 +24,7 @@ import androidx.lifecycle.LifecycleOwner
 import java.util.Locale
 
 /** A screen that displays a the details for a given place.  */
-class PlaceDetailsScreen(carContext: CarContext, private val title: String) :
+class PlaceDetailsScreen(carContext: CarContext, private val title: String, private val description: String) :
     Screen(carContext),
     DefaultLifecycleObserver {
 
@@ -92,9 +92,9 @@ class PlaceDetailsScreen(carContext: CarContext, private val title: String) :
             // Add the phone number.
             val phoneNumber2: String =
                 "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"
-            if (phoneNumber2 != null) {
+            if (description != null) {
                 hasSecondRow = true
-                row3Builder.addText(phoneNumber2)
+                row3Builder.addText(description)
             }
             if (hasSecondRow) {
                 paneBuilder.addRow(row3Builder.build())
@@ -133,8 +133,8 @@ class PlaceDetailsScreen(carContext: CarContext, private val title: String) :
         private const val HALF_STAR = "\u00BD"
 
         /** Returns a screen showing the details of the given [PlaceInfo].  */
-        fun create(carContext: CarContext, title: String): PlaceDetailsScreen {
-            return PlaceDetailsScreen(carContext, title)
+        fun create(carContext: CarContext, title: String,  description: String): PlaceDetailsScreen {
+            return PlaceDetailsScreen(carContext, title, description)
         }
 
         private fun getAddressLines(address: Address): List<CharSequence> {

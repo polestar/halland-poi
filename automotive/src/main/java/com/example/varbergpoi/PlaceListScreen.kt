@@ -112,7 +112,7 @@ class PlaceListScreen(
 
             listBuilder.addItem(
                 Row.Builder().setOnClickListener {
-                    screenManager.push(PlaceDetailsScreen(carContext, item.title))
+                    screenManager.push(PlaceDetailsScreen(carContext, item.title, item.description))
                 }.setTitle(item.title).addText(
                     distanceText
                 ).setMetadata(
