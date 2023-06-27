@@ -7,6 +7,7 @@ import android.location.Geocoder
 import android.net.Uri
 import android.text.Spannable
 import android.text.SpannableString
+import android.util.Log
 import androidx.car.app.CarContext
 import androidx.car.app.CarToast
 import androidx.car.app.HostException
@@ -116,14 +117,16 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
     }
 
     private fun onClickNavigate() {
-//        val latitude = item.coordinates.first
-//        val longitude = item.coordinates.second
-        val latitude = 57.78305319672344
-        val longitude = 12.043458128835622
+        val latitude = item.coordinates.first
+        val longitude = item.coordinates.second
+//        val latitude = 57.78305319672344
+//        val longitude = 12.043458128835622
 
         val mapIntentUri = Uri.parse("google.navigation:q=$latitude,$longitude")
         val mapIntent = Intent(Intent.ACTION_VIEW, mapIntentUri)
         mapIntent.setPackage("com.google.android.apps.maps")
+
+        mapIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
         try {
             if (mapIntent.resolveActivity(carContext.packageManager) != null) {
@@ -136,6 +139,7 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
                 ).show()
             }
         } catch (e: Exception) {
+            Log.e("PlaceDetailsScreen", "Failure starting navigation: $latitude, $longitude", e)
             CarToast.makeText(
                 carContext,
                 "Failure starting navigation: $latitude, $longitude",
