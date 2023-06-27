@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.location.Address
 import android.location.Geocoder
+import android.net.Uri
 import android.text.Spannable
 import android.text.SpannableString
 import androidx.car.app.CarContext
@@ -21,10 +22,11 @@ import androidx.car.app.model.Template
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import com.example.varbergpoi.dummydata.POIItem
 import java.util.Locale
 
 /** A screen that displays a the details for a given place.  */
-class PlaceDetailsScreen(carContext: CarContext, private val title: String, private val description: String) :
+class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
     Screen(carContext),
     DefaultLifecycleObserver {
 
@@ -92,9 +94,9 @@ class PlaceDetailsScreen(carContext: CarContext, private val title: String, priv
             // Add the phone number.
             val phoneNumber2: String =
                 "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"
-            if (description != null) {
+            if (item.description.isNotEmpty()) {
                 hasSecondRow = true
-                row3Builder.addText(description)
+                row3Builder.addText(item.description)
             }
             if (hasSecondRow) {
                 paneBuilder.addRow(row3Builder.build())
@@ -108,34 +110,35 @@ class PlaceDetailsScreen(carContext: CarContext, private val title: String, priv
                     .build())
         }
         return PaneTemplate.Builder(paneBuilder.build())
-            .setTitle(title)
+            .setTitle(item.title)
             .setHeaderAction(Action.BACK)
             .build()
     }
 
     private fun onClickNavigate() {
-        val intent = Intent(CarContext.ACTION_NAVIGATE)
+        val latitude = item.coordinates.first
+        val longitude = item.coordinates.second
+
+        val mapIntentUri = Uri.parse("google.navigation:q=$latitude,$longitude")
+        val mapIntent = Intent(Intent.ACTION_VIEW, mapIntentUri)
+        mapIntent.setPackage("com.google.android.apps.maps")
+
         try {
-            carContext.startCarApp(intent)
-        } catch (e: HostException) {
+            carContext.startActivity(mapIntent)
+        } catch (e: Exception) {
             CarToast.makeText(
                 carContext,
                 "Failure starting navigation",
                 CarToast.LENGTH_LONG
-            )
-                .show()
+            ).show()
         }
     }
+
 
 
     companion object {
         private const val FULL_STAR = "\u2605"
         private const val HALF_STAR = "\u00BD"
-
-        /** Returns a screen showing the details of the given [PlaceInfo].  */
-        fun create(carContext: CarContext, title: String,  description: String): PlaceDetailsScreen {
-            return PlaceDetailsScreen(carContext, title, description)
-        }
 
         private fun getAddressLines(address: Address): List<CharSequence> {
             val list: MutableList<CharSequence> = ArrayList()
