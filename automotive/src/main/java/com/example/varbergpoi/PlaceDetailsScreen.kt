@@ -91,9 +91,7 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
             //Row Three
             val row3Builder = Row.Builder().setTitle("Beskrivning")
 
-            // Add the phone number.
-            val phoneNumber2: String =
-                "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"
+            // Add a description.
             if (item.description.isNotEmpty()) {
                 hasSecondRow = true
                 row3Builder.addText(item.description)
@@ -105,7 +103,7 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
             // Add a button with a navigate action.
             paneBuilder.addAction(
                 Action.Builder()
-                    .setTitle("Navigate")
+                    .setTitle("Navigera")
                     .setOnClickListener { onClickNavigate() }
                     .build())
 
@@ -121,8 +119,6 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
     private fun onClickNavigate() {
         val latitude = item.coordinates.first
         val longitude = item.coordinates.second
-//        val latitude = 57.78305319672344
-//        val longitude = 12.043458128835622
 
         val mapIntentUri = Uri.parse("google.navigation:q=$latitude,$longitude")
         val mapIntent = Intent(Intent.ACTION_VIEW, mapIntentUri)
@@ -136,15 +132,14 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
             } else {
                 CarToast.makeText(
                     carContext,
-                    "Google Maps is not installed",
+                    "Google Maps är inte installerat.",
                     CarToast.LENGTH_LONG
                 ).show()
             }
         } catch (e: Exception) {
-            Log.e("PlaceDetailsScreen", "Failure starting navigation: $latitude, $longitude", e)
             CarToast.makeText(
                 carContext,
-                "Failure starting navigation: $latitude, $longitude",
+                "Det gick inte att starta navigeringen.",
                 CarToast.LENGTH_LONG
             ).show()
         }
@@ -190,7 +185,7 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
                 s += if (r < 1) HALF_STAR else FULL_STAR
                 --r
             }
-            val ss = SpannableString(s + " ratings: " + String.format(Locale.US, "%.2f", ratings))
+            val ss = SpannableString(s + " betyg: " + String.format(Locale.US, "%.2f", ratings))
             if (!s.isEmpty()) {
                 colorize(ss, CarColor.YELLOW, 0, s.length)
             }

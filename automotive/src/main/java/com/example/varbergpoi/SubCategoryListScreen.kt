@@ -48,9 +48,6 @@ class SubCategoryListScreen(
             .setTitle(
                 " "
             )
-            .setOnClickListener {
-                // TODO: Show settings message
-            }
             .build()
         return ListTemplate.Builder()
             .setSingleList(listBuilder.build())
