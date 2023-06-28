@@ -1,6 +1,7 @@
 package com.example.varbergpoi
 
 import androidx.car.app.CarContext
+import androidx.car.app.CarToast
 import androidx.car.app.Screen
 import androidx.car.app.model.Action
 import androidx.car.app.model.ActionStrip
@@ -46,8 +47,16 @@ class SubCategoryListScreen(
 
         val settings = Action.Builder()
             .setTitle(
-                " "
+                "Action title"
             )
+            .setOnClickListener {
+                CarToast.makeText(
+                    carContext,
+                    "Sparad",
+                    CarToast.LENGTH_LONG
+                )
+                    .show()
+            }
             .build()
         return ListTemplate.Builder()
             .setSingleList(listBuilder.build())

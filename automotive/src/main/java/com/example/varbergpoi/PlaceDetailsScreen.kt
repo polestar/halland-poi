@@ -105,6 +105,7 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
                 Action.Builder()
                     .setTitle("Navigera")
                     .setOnClickListener { onClickNavigate() }
+                    .setFlags(Action.FLAG_PRIMARY)
                     .build())
 
             //TODO: When favoriting an item, add it to the "favorites" list in DummyHandler
