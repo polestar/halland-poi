@@ -47,30 +47,10 @@ class SubCategoryListScreen(
                 .build()
         }
 
-        val settings = Action.Builder()
-            .setIcon(
-                CarIcon.Builder(
-                    IconCompat.createWithResource(carContext, R.drawable.baseline_favorite_border_24)
-                ).build()
-            )
-            .setOnClickListener {
-                CarToast.makeText(
-                    carContext,
-                    "Sparad",
-                    CarToast.LENGTH_LONG
-                )
-                    .show()
-            }
-            .build()
         return ListTemplate.Builder()
             .setSingleList(listBuilder.build())
             .setTitle(screenTitle)
             .setHeaderAction(Action.BACK)
-            .setActionStrip(
-                ActionStrip.Builder()
-                    .addAction(settings)
-                    .build()
-            )
             .build()
     }
 

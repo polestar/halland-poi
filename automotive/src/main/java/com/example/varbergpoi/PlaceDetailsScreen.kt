@@ -12,6 +12,7 @@ import androidx.car.app.CarContext
 import androidx.car.app.CarToast
 import androidx.car.app.Screen
 import androidx.car.app.model.Action
+import androidx.car.app.model.ActionStrip
 import androidx.car.app.model.CarColor
 import androidx.car.app.model.CarIcon
 import androidx.car.app.model.ForegroundCarColorSpan
@@ -107,13 +108,45 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
                     .setOnClickListener { onClickNavigate() }
                     .setFlags(Action.FLAG_PRIMARY)
                     .build())
-
-            //TODO: When favoriting an item, add it to the "favorites" list in DummyHandler
         }
+
+        var myBooleanVariable: Boolean = false
+
+        val settings = Action.Builder()
+            .setIcon(
+                CarIcon.Builder(
+                    IconCompat.createWithResource(
+                        carContext,
+                        (if (!myBooleanVariable) {
+                            R.drawable.baseline_favorite_border_24
+                        }else {
+                            R.drawable.baseline_favorite_24
+                        })
+                    )
+                ).build()
+            )
+            .setOnClickListener {
+                //TODO: When favoriting an item, add it to the "favorites" list in DummyHandler
+
+                invalidate()
+
+                CarToast.makeText(
+                    carContext,
+                    "Sparat",
+                    CarToast.LENGTH_LONG
+                )
+                    .show()
+            }
+            .build()
 
         return PaneTemplate.Builder(paneBuilder.build())
             .setTitle(item.title)
             .setHeaderAction(Action.BACK)
+            .setActionStrip(
+                ActionStrip.Builder()
+                    .addAction(settings)
+                    .build()
+            )
             .build()
     }
 
