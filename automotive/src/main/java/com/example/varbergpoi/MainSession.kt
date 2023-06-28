@@ -70,20 +70,26 @@ class MainScreen(carContext: CarContext) : Screen(carContext) {
 
         val favorites = poiBox.query(POIItem_.isFavorite.equal(true)).build().find()
 
-        if(favorites.isNotEmpty()) {
+        if (favorites.isNotEmpty()) {
+            val favoriteItem = favorites.first().toString()
+
+            // Extract the value of the title field
+            val titleValue = favoriteItem.substringAfter("title=").substringBefore(",").trim()
+
             val gridItemBuilder = GridItem.Builder()
                 .setTitle("Favoriter")
                 .setOnClickListener {
-                        screenManager.push(
-                            PlaceListScreen(
-                                carContext, favorites, "Title")
+                    screenManager.push(
+                        PlaceListScreen(
+                            carContext, favorites, "${titleValue}"
                         )
+                    )
                 }
                 .setImage(
                     CarIcon.Builder(
                         IconCompat.createWithResource(
                             carContext,
-                             R.drawable.favorite_points_icon
+                            R.drawable.favorite_points_icon
                         )
                     ).build()
                 )
