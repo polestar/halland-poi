@@ -8,13 +8,13 @@ class DummyHandler {
         fun getInstance(): DummyHandler {
             if (inst == null) {
                 inst = DummyHandler().apply {
-                    categories.add(
-                        Category(
-                            "Favoriter",
-                            mutableListOf(),
-                            R.drawable.favorite_points_icon
-                        )
-                    )
+//                    categories.add(
+//                        Category(
+//                            "Favoriter",
+//                            mutableListOf(),
+//                            R.drawable.favorite_points_icon
+//                        )
+//                    )
                     categories.add(
                         Category(
                             "Senaste",

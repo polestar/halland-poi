@@ -64,8 +64,26 @@ class MainScreen(carContext: CarContext) : Screen(carContext) {
             gridItemListBuilder.addItem(gridItemBuilder)
         }
         if(dHandler.favorites.isNotEmpty()) {
-            //TODO: Create new favorite category to show here
-            //TODO: In on click forward dHandler.favorites to PlaceListScreen
+
+            val gridItemBuilder = GridItem.Builder()
+                .setTitle("Favoriter")
+                .setOnClickListener {
+                        screenManager.push(
+                            PlaceListScreen(
+                                carContext, dHandler.favorites, "Title")
+                        )
+                }
+                .setImage(
+                    CarIcon.Builder(
+                        IconCompat.createWithResource(
+                            carContext,
+                             R.drawable.favorite_points_icon
+                        )
+                    ).build()
+                )
+                .build()
+
+            gridItemListBuilder.addItem(gridItemBuilder)
         }
 
         return GridTemplate.Builder()

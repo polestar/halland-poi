@@ -23,6 +23,7 @@ import androidx.car.app.model.Template
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import com.example.varbergpoi.dummydata.DummyHandler
 import com.example.varbergpoi.dummydata.POIItem
 import java.util.Locale
 
@@ -110,6 +111,8 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
                     .build())
         }
 
+        val dHandler = DummyHandler.getInstance()
+
         var myBooleanVariable: Boolean = false
 
         val settings = Action.Builder()
@@ -117,17 +120,17 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
                 CarIcon.Builder(
                     IconCompat.createWithResource(
                         carContext,
-                        (if (!myBooleanVariable) {
-                            R.drawable.baseline_favorite_border_24
-                        }else {
+                        (if (dHandler.favorites.contains(item)) {
                             R.drawable.baseline_favorite_24
+                        } else {
+                            R.drawable.baseline_favorite_border_24
                         })
                     )
                 ).build()
             )
             .setOnClickListener {
                 //TODO: When favoriting an item, add it to the "favorites" list in DummyHandler
-
+                dHandler.favorites.add(item)
                 invalidate()
 
                 CarToast.makeText(
