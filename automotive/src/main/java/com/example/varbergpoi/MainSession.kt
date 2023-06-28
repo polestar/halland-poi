@@ -13,7 +13,9 @@ import androidx.car.app.model.GridTemplate
 import androidx.car.app.model.ItemList
 import androidx.car.app.model.Template
 import androidx.core.graphics.drawable.IconCompat
-import com.example.varbergpoi.dummydata.DummyHandler
+import com.example.varbergpoi.dummydata.Category
+import com.example.varbergpoi.dummydata.POIItem
+import com.example.varbergpoi.dummydata.POIItem_
 
 
 class MainSession : Session() {
@@ -34,11 +36,13 @@ class MainSession : Session() {
 
 class MainScreen(carContext: CarContext) : Screen(carContext) {
     override fun onGetTemplate(): Template {
-        val dHandler = DummyHandler.getInstance()
+
+        val categoryBox = ObjectBox.getBoxStore().boxFor(Category::class.java)
+        val poiBox = ObjectBox.getBoxStore().boxFor(POIItem::class.java)
 
         val gridItemListBuilder = ItemList.Builder()
 
-        dHandler.categories.forEach { data ->
+        categoryBox.all.forEach { data ->
             val gridItemBuilder = GridItem.Builder()
                 .setTitle(data.title)
                 .setOnClickListener {
@@ -63,14 +67,16 @@ class MainScreen(carContext: CarContext) : Screen(carContext) {
 
             gridItemListBuilder.addItem(gridItemBuilder)
         }
-        if(dHandler.favorites.isNotEmpty()) {
 
+        val favorites = poiBox.query(POIItem_.isFavorite.equal(true)).build().find()
+
+        if(favorites.isNotEmpty()) {
             val gridItemBuilder = GridItem.Builder()
                 .setTitle("Favoriter")
                 .setOnClickListener {
                         screenManager.push(
                             PlaceListScreen(
-                                carContext, dHandler.favorites, "Title")
+                                carContext, favorites, "Title")
                         )
                 }
                 .setImage(

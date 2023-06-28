@@ -7,7 +7,6 @@ import android.location.Geocoder
 import android.net.Uri
 import android.text.Spannable
 import android.text.SpannableString
-import android.util.Log
 import androidx.car.app.CarContext
 import androidx.car.app.CarToast
 import androidx.car.app.Screen
@@ -23,7 +22,6 @@ import androidx.car.app.model.Template
 import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
-import com.example.varbergpoi.dummydata.DummyHandler
 import com.example.varbergpoi.dummydata.POIItem
 import java.util.Locale
 
@@ -111,34 +109,22 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
                     .build())
         }
 
-        val dHandler = DummyHandler.getInstance()
-
-        var myBooleanVariable: Boolean = false
+        val poiBox = ObjectBox.getBoxStore().boxFor(POIItem::class.java)
+        var isFavorite = poiBox.get(item.id).isFavorite
 
         val settings = Action.Builder()
             .setIcon(
                 CarIcon.Builder(
                     IconCompat.createWithResource(
                         carContext,
-                        (if (dHandler.favorites.contains(item)) {
-                            R.drawable.baseline_favorite_24
-                        } else {
-                            R.drawable.baseline_favorite_border_24
-                        })
+                        if (isFavorite) R.drawable.baseline_favorite_24 else R.drawable.baseline_favorite_border_24
                     )
                 ).build()
             )
             .setOnClickListener {
-                //TODO: When favoriting an item, add it to the "favorites" list in DummyHandler
-                dHandler.favorites.add(item)
+                item.isFavorite = !item.isFavorite
+                poiBox.put(item)
                 invalidate()
-
-                CarToast.makeText(
-                    carContext,
-                    "Sparat",
-                    CarToast.LENGTH_LONG
-                )
-                    .show()
             }
             .build()
 
@@ -154,25 +140,16 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
     }
 
     private fun onClickNavigate() {
-        val latitude = item.coordinates.first
-        val longitude = item.coordinates.second
+        val latitude = item.lat
+        val longitude = item.lng
 
         val mapIntentUri = Uri.parse("google.navigation:q=$latitude,$longitude")
         val mapIntent = Intent(Intent.ACTION_VIEW, mapIntentUri)
         mapIntent.setPackage("com.google.android.apps.maps")
-
         mapIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
         try {
-            if (mapIntent.resolveActivity(carContext.packageManager) != null) {
-                carContext.startActivity(mapIntent)
-            } else {
-                CarToast.makeText(
-                    carContext,
-                    "Google Maps är inte installerat.",
-                    CarToast.LENGTH_LONG
-                ).show()
-            }
+            carContext.startActivity(mapIntent)
         } catch (e: Exception) {
             CarToast.makeText(
                 carContext,

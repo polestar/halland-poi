@@ -1,6 +1,10 @@
 buildscript {
+    repositories {
+        mavenCentral()
+    }
     dependencies {
         classpath("com.android.tools.build:gradle:8.0.2")
+        classpath("io.objectbox:objectbox-gradle-plugin:3.6.0")
     }
 }
 // Top-level build file where you can add configuration options common to all sub-projects/modules.

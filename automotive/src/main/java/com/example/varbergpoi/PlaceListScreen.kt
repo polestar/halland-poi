@@ -18,16 +18,16 @@ import androidx.car.app.model.Distance
 import androidx.car.app.model.Distance.UNIT_KILOMETERS
 import androidx.car.app.model.DistanceSpan
 import androidx.car.app.model.ItemList
+import androidx.car.app.model.Metadata
 import androidx.car.app.model.Place
 import androidx.car.app.model.PlaceListMapTemplate
+import androidx.car.app.model.PlaceMarker
 import androidx.car.app.model.Row
 import androidx.car.app.model.Template
 import androidx.core.location.LocationListenerCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import com.example.varbergpoi.dummydata.POIItem
-import androidx.car.app.model.Metadata;
-import androidx.car.app.model.PlaceMarker
 
 
 class PlaceListScreen(
@@ -95,8 +95,8 @@ class PlaceListScreen(
             Location.distanceBetween(
                 mCurrentLocation?.latitude ?: 0.0,
                 mCurrentLocation?.longitude ?: 0.0,
-                item.coordinates.first,
-                item.coordinates.second,
+                item.lat,
+                item.lng,
                 results
             )
             val distanceText = SpannableString(" ").apply {
@@ -119,8 +119,8 @@ class PlaceListScreen(
                     Metadata.Builder().setPlace(
                         Place.Builder(
                             CarLocation.create(
-                                item.coordinates.first,
-                                item.coordinates.second
+                                item.lat,
+                                item.lng
                             )
                         ).setMarker(PlaceMarker.Builder().build()).build()
                     ).build()
