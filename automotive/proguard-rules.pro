@@ -19,3 +19,9 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keep class androidx.car.app.HandshakeInfo{*;}
+-keep class androidx.car.app.FailureResponse{*;}
+-keep class androidx.car.app.activity.**{*;}
+-keep class androidx.car.app.AppInfo{*;}
+-keep class androidx.car.app.model.**{*;}

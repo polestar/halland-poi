@@ -37,7 +37,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false //TODO: Configure proguard before enabling this
+            isMinifyEnabled = true
             isDebuggable = false
             signingConfig = signingConfigs.getByName("release")
             proguardFiles(
@@ -59,7 +59,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
