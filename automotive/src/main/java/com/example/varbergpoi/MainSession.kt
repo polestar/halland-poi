@@ -71,12 +71,13 @@ class MainScreen(carContext: CarContext) : Screen(carContext) {
         val favorites = poiBox.query(POIItem_.isFavorite.equal(true)).build().find()
 
         if (favorites.isNotEmpty()) {
+
             val gridItemBuilder = GridItem.Builder()
                 .setTitle("Favoriter")
                 .setOnClickListener {
                     screenManager.push(
                         PlaceListScreen(
-                            carContext, favorites, "Favoriter"
+                            carContext, favorites, "Dina favoriter"
                         )
                     )
                 }

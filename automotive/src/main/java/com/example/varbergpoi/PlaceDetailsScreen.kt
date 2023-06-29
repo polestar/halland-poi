@@ -69,7 +69,7 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
             var hasSecondRow = false
 
             //Row Two
-            val row2Builder = Row.Builder().setTitle("Telefonnummer och Betyg")
+            val row2Builder = Row.Builder().setTitle("Telefonnummer")
 
             // Add the phone number.
             val phoneNumber: String = "+46 700 51 55 36"
@@ -78,18 +78,24 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
                 row2Builder.addText(phoneNumber)
             }
 
-            // Add the place's ratings.
-            val ratings: Double = 3.5
-            if (ratings >= 0) {
-                hasSecondRow = true
-                row2Builder.addText(getRatingsString(ratings))
-            }
             if (hasSecondRow) {
                 paneBuilder.addRow(row2Builder.build())
             }
 
+            val row4Builder = Row.Builder().setTitle("Betyg")
+
+            // Add the place's ratings.
+            val ratings: Double = 3.0
+            if (ratings >= 0) {
+                hasSecondRow = true
+                row4Builder.addText(getRatingsString(ratings))
+            }
+            if (hasSecondRow) {
+                paneBuilder.addRow(row4Builder.build())
+            }
+
             //Row Three
-            val row3Builder = Row.Builder().setTitle("Beskrivning")
+            val row3Builder = Row.Builder().setTitle("Om platsen")
 
             // Add a description.
             if (item.description.isNotEmpty()) {
