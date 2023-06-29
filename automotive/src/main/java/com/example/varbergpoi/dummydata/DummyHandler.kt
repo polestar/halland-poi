@@ -10,7 +10,7 @@ import io.objectbox.relation.ToMany
 class DummyHandler {
     companion object {
         fun initDummyData() {
-            val categoryBox = ObjectBox.getBoxStore().boxFor(Category::class.java)
+            val categoryBox = ObjectBox.boxStore.boxFor(Category::class.java)
             if (categoryBox.isEmpty) {
                 val categories: MutableList<Category> = mutableListOf()
 //                categories.add(

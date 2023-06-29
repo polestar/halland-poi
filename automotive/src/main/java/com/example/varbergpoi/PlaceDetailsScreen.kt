@@ -115,7 +115,7 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
                     .build())
         }
 
-        val poiBox = ObjectBox.getBoxStore().boxFor(POIItem::class.java)
+        val poiBox = ObjectBox.boxStore.boxFor(POIItem::class.java)
         var isFavorite = poiBox.get(item.id).isFavorite
 
         val settings = Action.Builder()

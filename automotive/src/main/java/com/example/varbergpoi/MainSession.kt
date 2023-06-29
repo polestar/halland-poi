@@ -37,8 +37,8 @@ class MainSession : Session() {
 class MainScreen(carContext: CarContext) : Screen(carContext) {
     override fun onGetTemplate(): Template {
 
-        val categoryBox = ObjectBox.getBoxStore().boxFor(Category::class.java)
-        val poiBox = ObjectBox.getBoxStore().boxFor(POIItem::class.java)
+        val categoryBox = ObjectBox.boxStore.boxFor(Category::class.java)
+        val poiBox = ObjectBox.boxStore.boxFor(POIItem::class.java)
 
         val gridItemListBuilder = ItemList.Builder()
 
