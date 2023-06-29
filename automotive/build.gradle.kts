@@ -30,14 +30,14 @@ android {
         applicationId = "com.polestar.hallandpoi.qa.android"
         minSdk = 29
         targetSdk = 33
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.0-RC2"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = true
+            isMinifyEnabled = false //TODO: Configure proguard before enabling this
             isDebuggable = false
             signingConfig = signingConfigs.getByName("release")
             proguardFiles(
