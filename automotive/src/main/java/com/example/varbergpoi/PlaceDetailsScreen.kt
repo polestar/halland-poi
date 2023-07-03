@@ -40,8 +40,8 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
     override fun onGetTemplate(): Template {
         val paneBuilder = Pane.Builder()
         val mDetails = listOf(
-            "Detail one",
-            "Detail two",
+            carContext.getString(R.string.first_detail),
+            carContext.getString(R.string.second_detail),
         )
 
         // If we don't have any places yet, show a loading progress indicator.
@@ -49,12 +49,12 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
             paneBuilder.setLoading(true)
         } else {
             //Row One
-            val row1Builder = Row.Builder().setTitle("Address")
+            val row1Builder = Row.Builder().setTitle(carContext.getString(R.string.address_title))
 
             // Add the address, split in multiple lines.
             val addressLines = listOf(
-                "Fredsgatan 5",
-                "302 46 Halmstad",
+                carContext.getString(R.string.street_address),
+                carContext.getString(R.string.city),
             )
             for (line in addressLines) {
                 row1Builder.addText(line)
@@ -69,10 +69,10 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
             var hasSecondRow = false
 
             //Row Two
-            val row2Builder = Row.Builder().setTitle("Telefonnummer")
+            val row2Builder = Row.Builder().setTitle(carContext.getString(R.string.phone_title))
 
             // Add the phone number.
-            val phoneNumber: String = "+46 700 51 55 36"
+            val phoneNumber: String = carContext.getString(R.string.phone_number)
             if (phoneNumber != null) {
                 hasSecondRow = true
                 row2Builder.addText(phoneNumber)
@@ -82,34 +82,37 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
                 paneBuilder.addRow(row2Builder.build())
             }
 
-            val row4Builder = Row.Builder().setTitle("Betyg")
+            //Row Three
+            val row3Builder = Row.Builder()
+                .setTitle(carContext.getString(R.string.ratings))
 
             // Add the place's ratings.
             val ratings: Double = 3.0
             if (ratings >= 0) {
                 hasSecondRow = true
-                row4Builder.addText(getRatingsString(ratings))
-            }
-            if (hasSecondRow) {
-                paneBuilder.addRow(row4Builder.build())
-            }
-
-            //Row Three
-            val row3Builder = Row.Builder().setTitle("Om platsen")
-
-            // Add a description.
-            if (item.description.isNotEmpty()) {
-                hasSecondRow = true
-                row3Builder.addText(item.description)
+                row3Builder.addText(getRatingsString(ratings))
             }
             if (hasSecondRow) {
                 paneBuilder.addRow(row3Builder.build())
             }
 
+            //Row Four
+            val row4Builder = Row.Builder()
+                .setTitle(carContext.getString(R.string.about))
+
+            // Add a description.
+            if (item.description.isNotEmpty()) {
+                hasSecondRow = true
+                row4Builder.addText(item.description)
+            }
+            if (hasSecondRow) {
+                paneBuilder.addRow(row4Builder.build())
+            }
+
             // Add a button with a navigate action.
             paneBuilder.addAction(
                 Action.Builder()
-                    .setTitle("Navigera")
+                    .setTitle(carContext.getString(R.string.navigate))
                     .setOnClickListener { onClickNavigate() }
                     .setFlags(Action.FLAG_PRIMARY)
                     .build())
@@ -159,7 +162,7 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
         } catch (e: Exception) {
             CarToast.makeText(
                 carContext,
-                "Det gick inte att starta navigeringen.",
+                carContext.getString(R.string.navigation_error_message),
                 CarToast.LENGTH_LONG
             ).show()
         }
@@ -205,7 +208,7 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
                 s += if (r < 1) HALF_STAR else FULL_STAR
                 --r
             }
-            val ss = SpannableString(s + " betyg: " + String.format(Locale.US, "%.2f", ratings))
+            val ss = SpannableString(s + R.string.place_ratings + String.format(Locale.US, "%.1f", ratings))
             if (!s.isEmpty()) {
                 colorize(ss, CarColor.YELLOW, 0, s.length)
             }

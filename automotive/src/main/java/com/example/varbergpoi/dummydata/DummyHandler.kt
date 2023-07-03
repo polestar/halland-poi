@@ -13,12 +13,6 @@ class DummyHandler {
             val categoryBox = ObjectBox.boxStore.boxFor(Category::class.java)
             if (categoryBox.isEmpty) {
                 val categories: MutableList<Category> = mutableListOf()
-//                categories.add(
-//                    Category(
-//                        title = "Senaste",
-//                        iconRes = R.drawable.latest_points_icon
-//                    )
-//                )
                 categories.add(
                     Category(
                         title = "Bekvämligheter",

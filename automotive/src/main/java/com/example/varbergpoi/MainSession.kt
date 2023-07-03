@@ -73,11 +73,11 @@ class MainScreen(carContext: CarContext) : Screen(carContext) {
         if (favorites.isNotEmpty()) {
 
             val gridItemBuilder = GridItem.Builder()
-                .setTitle("Favoriter")
+                .setTitle(carContext.getString(R.string.category_title_favorite))
                 .setOnClickListener {
                     screenManager.push(
                         PlaceListScreen(
-                            carContext, favorites, "Dina favoriter"
+                            carContext, favorites, carContext.getString(R.string.your_favorites_text)
                         )
                     )
                 }
@@ -95,7 +95,7 @@ class MainScreen(carContext: CarContext) : Screen(carContext) {
         }
 
         return GridTemplate.Builder()
-            .setTitle("Halland points of interests")
+            .setTitle( carContext.getString(R.string.header_title))
             .setSingleList(gridItemListBuilder.build())
             .build()
     }
