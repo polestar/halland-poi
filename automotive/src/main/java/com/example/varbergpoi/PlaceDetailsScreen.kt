@@ -40,8 +40,8 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
     override fun onGetTemplate(): Template {
         val paneBuilder = Pane.Builder()
         val mDetails = listOf(
-            carContext.getString(R.string.first_detail),
-            carContext.getString(R.string.second_detail),
+            "Detail one",
+            "Detail two",
         )
 
         // If we don't have any places yet, show a loading progress indicator.
@@ -53,8 +53,8 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
 
             // Add the address, split in multiple lines.
             val addressLines = listOf(
-                carContext.getString(R.string.street_address),
-                carContext.getString(R.string.city),
+                "Fredsgatan 5",
+                "302 46 Halmstad",
             )
             for (line in addressLines) {
                 row1Builder.addText(line)
@@ -72,7 +72,7 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
             val row2Builder = Row.Builder().setTitle(carContext.getString(R.string.phone_title))
 
             // Add the phone number.
-            val phoneNumber: String = carContext.getString(R.string.phone_number)
+            val phoneNumber: String = "+46 700 51 55 36"
             if (phoneNumber != null) {
                 hasSecondRow = true
                 row2Builder.addText(phoneNumber)
@@ -84,10 +84,10 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
 
             //Row Three
             val row3Builder = Row.Builder()
-                .setTitle(carContext.getString(R.string.ratings))
+                .setTitle(carContext.getString(R.string.ratings_text))
 
             // Add the place's ratings.
-            val ratings: Double = 3.0
+            val ratings: Double = 3.8
             if (ratings >= 0) {
                 hasSecondRow = true
                 row3Builder.addText(getRatingsString(ratings))
@@ -126,7 +126,7 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
                 CarIcon.Builder(
                     IconCompat.createWithResource(
                         carContext,
-                        if (isFavorite) R.drawable.baseline_favorite_24 else R.drawable.baseline_favorite_border_24
+                        if (isFavorite) R.drawable.baseline_favorite2_24 else R.drawable.baseline_favorite_border_24
                     )
                 ).build()
             )
@@ -170,7 +170,10 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
 
     companion object {
         private const val FULL_STAR = "\u2605"
-        private const val HALF_STAR = "\u00BD"
+//        private const val HALF_STAR = "\u00BD"
+//        private const val HALF_STAR = "\u2BE8" does not work
+        private const val HALF_STAR = "\u272C"
+
 
         private fun getAddressLines(address: Address): List<CharSequence> {
             val list: MutableList<CharSequence> = ArrayList()
@@ -200,22 +203,23 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
         }
 
         private fun getRatingsString(ratings: Double): CharSequence {
-            var s: String
-            var r: Double
-            s = ""
-            r = ratings
+            var s: String = ""
+            var r: Double = ratings
             while (r > 0) {
-                s += if (r < 1) HALF_STAR else FULL_STAR
+                s += if ( r < 0.8){
+                    HALF_STAR
+                }
+                else FULL_STAR
                 --r
             }
-            val ss = SpannableString(s + R.string.place_ratings + String.format(Locale.US, "%.1f", ratings))
-            if (!s.isEmpty()) {
+            val ss = SpannableString(s + " " + String.format(Locale.US, "%.1f", ratings))
+            if (s.isNotEmpty()) {
                 colorize(ss, CarColor.YELLOW, 0, s.length)
             }
             return ss
         }
 
-        fun colorize(s: SpannableString, color: CarColor?, index: Int, length: Int) {
+        private fun colorize(s: SpannableString, color: CarColor?, index: Int, length: Int) {
             s.setSpan(
                 ForegroundCarColorSpan.create(color!!),
                 index,
