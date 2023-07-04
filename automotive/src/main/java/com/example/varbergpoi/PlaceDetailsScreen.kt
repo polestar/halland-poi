@@ -126,7 +126,7 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
                 CarIcon.Builder(
                     IconCompat.createWithResource(
                         carContext,
-                        if (isFavorite) R.drawable.baseline_favorite2_24 else R.drawable.baseline_favorite_border_24
+                        if (isFavorite) R.drawable.baseline_favorite_24 else R.drawable.baseline_favorite_border_24
                     )
                 ).build()
             )
@@ -170,10 +170,6 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
 
     companion object {
         private const val FULL_STAR = "\u2605"
-//        private const val HALF_STAR = "\u00BD"
-//        private const val HALF_STAR = "\u2BE8" does not work
-        private const val HALF_STAR = "\u272C"
-
 
         private fun getAddressLines(address: Address): List<CharSequence> {
             val list: MutableList<CharSequence> = ArrayList()
@@ -203,19 +199,10 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
         }
 
         private fun getRatingsString(ratings: Double): CharSequence {
-            var s: String = ""
             var r: Double = ratings
-            while (r > 0) {
-                s += if ( r < 0.8){
-                    HALF_STAR
-                }
-                else FULL_STAR
-                --r
-            }
-            val ss = SpannableString(s + " " + String.format(Locale.US, "%.1f", ratings))
-            if (s.isNotEmpty()) {
-                colorize(ss, CarColor.YELLOW, 0, s.length)
-            }
+            val ss = SpannableString(FULL_STAR + " " + String.format(Locale.US, "%.1f", ratings))
+
+            colorize(ss, CarColor.YELLOW, 0, 1)
             return ss
         }
 
