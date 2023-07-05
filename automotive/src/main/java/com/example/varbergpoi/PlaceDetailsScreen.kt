@@ -115,7 +115,13 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
                     .setTitle(carContext.getString(R.string.navigate))
                     .setOnClickListener { onClickNavigate() }
                     .setFlags(Action.FLAG_PRIMARY)
-                    .build())
+                    .build()
+            ).addAction(
+                Action.Builder()
+                    .setTitle(carContext.getString(R.string.phone_button_text))
+                    .setOnClickListener { openDialer() }
+                    .build()
+            )
         }
 
         val poiBox = ObjectBox.boxStore.boxFor(POIItem::class.java)
@@ -163,6 +169,23 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
             CarToast.makeText(
                 carContext,
                 carContext.getString(R.string.navigation_error_message),
+                CarToast.LENGTH_LONG
+            ).show()
+        }
+    }
+
+    private fun openDialer() {
+        val phoneNumber: String = "+46 700 51 55 36"
+        val intent = Intent(Intent.ACTION_DIAL).apply {
+            data = Uri.parse("tel:${phoneNumber}")
+        }
+
+        try {
+            carContext.startCarApp(intent)
+        } catch (e: Exception) {
+            CarToast.makeText(
+                carContext,
+                carContext.getString(R.string.dialing_error_message),
                 CarToast.LENGTH_LONG
             ).show()
         }
