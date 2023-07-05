@@ -82,7 +82,7 @@ class MainScreen(carContext: CarContext) : Screen(carContext) {
                 }
                 .setImage(
                     CarIcon.Builder(
-                        IconCompat.createWithResource(carContext, R.drawable.bubble_heart)
+                        IconCompat.createWithResource(carContext, R.drawable.bubble_restaurant)
                     ).build()).build()
             gridItemListBuilder.addItem(gridItemBuilder)
         }
