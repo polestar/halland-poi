@@ -71,7 +71,6 @@ class MainScreen(carContext: CarContext) : Screen(carContext) {
         val favorites = poiBox.query(POIItem_.isFavorite.equal(true)).build().find()
 
         if (favorites.isNotEmpty()) {
-
             val gridItemBuilder = GridItem.Builder()
                 .setTitle(carContext.getString(R.string.category_title_favorite))
                 .setOnClickListener {
@@ -83,14 +82,8 @@ class MainScreen(carContext: CarContext) : Screen(carContext) {
                 }
                 .setImage(
                     CarIcon.Builder(
-                        IconCompat.createWithResource(
-                            carContext,
-                            R.drawable.favorite_points_icon
-                        )
-                    ).build()
-                )
-                .build()
-
+                        IconCompat.createWithResource(carContext, R.drawable.bubble_heart)
+                    ).build()).build()
             gridItemListBuilder.addItem(gridItemBuilder)
         }
 
