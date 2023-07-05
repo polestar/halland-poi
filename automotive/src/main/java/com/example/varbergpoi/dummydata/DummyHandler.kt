@@ -16,7 +16,7 @@ class DummyHandler {
                 categories.add(
                     Category(
                         title = "Bekvämligheter",
-                        iconRes = R.drawable.charging_stations_icon
+                        iconRes = R.drawable.bubble_charger
                     )
                 )
                 categories.add(
