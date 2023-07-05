@@ -22,7 +22,7 @@ class DummyHandler {
                 categories.add(
                     Category(
                         title = "Mat & Dryck",
-                        iconRes = R.drawable.local_dining_icon
+                        iconRes = R.drawable.bubble_restaurant
                     ).apply {
                         subCategories.add(
                             SubCategory(
@@ -225,7 +225,7 @@ class DummyHandler {
                 categories.add(
                     Category(
                         title = "Aktiviteter",
-                        iconRes = R.drawable.hiking_areas_icon
+                        iconRes = R.drawable.bubble_walk
                     )
                 )
                 categories.add(
@@ -237,13 +237,13 @@ class DummyHandler {
                 categories.add(
                     Category(
                         title = "Kultur & Historia",
-                        iconRes = R.drawable.culture_icon
+                        iconRes = R.drawable.bubble_theater
                     )
                 )
                 categories.add(
                     Category(
                         title = "Samlingar",
-                        iconRes = R.drawable.collections_icon
+                        iconRes = R.drawable.bubble_star_fill
                     )
                 )
                 Log.d("Debug", "Populated objectbox")
