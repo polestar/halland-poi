@@ -243,7 +243,7 @@ class DummyHandler {
                 categories.add(
                     Category(
                         title = "Samlingar",
-                        iconRes = R.drawable.bubble_star_fill
+                        iconRes = R.drawable.bubble_star_ol
                     )
                 )
                 Log.d("Debug", "Populated objectbox")
