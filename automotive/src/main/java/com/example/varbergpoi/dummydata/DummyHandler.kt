@@ -219,7 +219,7 @@ class DummyHandler {
                 categories.add(
                     Category(
                         title = "Badplatser",
-                        iconRes = R.drawable.beaches_icon
+                        iconRes = R.drawable.bubble_swim
                     )
                 )
                 categories.add(
@@ -231,7 +231,7 @@ class DummyHandler {
                 categories.add(
                     Category(
                         title = "Natur",
-                        iconRes = R.drawable.nature_icon
+                        iconRes = R.drawable.bubble_park
                     )
                 )
                 categories.add(
