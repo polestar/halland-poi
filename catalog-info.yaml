@@ -2,13 +2,13 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: halland-poi
-  description: A specific place or location point on a map that someone might find interesting or useful.
+  description: Point Of Interest.
   annotations:
     github.com/project-slug: polestar/halland-poi
     backstage.io/techdocs-ref: dir:.
   golar:
     type: mobile-app
 spec:
-  type: mobile-app
+  type: service
   lifecycle: experimental
   owner: polestar/conx-innovation
