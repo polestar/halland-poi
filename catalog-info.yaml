@@ -1,0 +1,16 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: Halland POI
+  description: A specific place or location point on a map that someone might find interesting or useful.
+  annotations:
+    github.com/project-slug: polestar/conx-varberg-poi
+    backstage.io/techdocs-ref: dir:.
+  links:
+    - url: https://<url>
+  golar:
+    type: android-app
+spec:
+  type: android-app
+  lifecycle: open source
+  owner: conx-innovation
