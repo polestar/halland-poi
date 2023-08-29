@@ -6,8 +6,6 @@ metadata:
   annotations:
     github.com/project-slug: polestar/conx-varberg-poi
     backstage.io/techdocs-ref: dir:.
-  links:
-    - url: https://<url>
   golar:
     type: mobile-app
 spec:
