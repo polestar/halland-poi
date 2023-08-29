@@ -1,5 +1,5 @@
 apiVersion: backstage.io/v1alpha1
-kind: template
+kind: Location
 metadata:
   name: Halland POI
   description: A specific place or location point on a map that someone might find interesting or useful.
