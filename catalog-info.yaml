@@ -9,8 +9,8 @@ metadata:
   links:
     - url: https://<url>
   golar:
-    type: android-app
+    type: mobile-app
 spec:
-  type: android-app
-  lifecycle: open source
-  owner: conx-innovation
+  type: mobile-app
+  lifecycle: experimental
+  owner: @polestar/conx-innovation
