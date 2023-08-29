@@ -1,10 +1,10 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: conx-varberg-poi
+  name: halland-poi
   description: A specific place or location point on a map that someone might find interesting or useful.
   annotations:
-    github.com/project-slug: polestar/conx-varberg-poi
+    github.com/project-slug: polestar/halland-poi
     backstage.io/techdocs-ref: dir:.
   golar:
     type: mobile-app
