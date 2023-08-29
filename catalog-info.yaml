@@ -13,4 +13,4 @@ metadata:
 spec:
   type: mobile-app
   lifecycle: experimental
-  owner: @polestar/conx-innovation
+  owner: polestar/conx-innovation
