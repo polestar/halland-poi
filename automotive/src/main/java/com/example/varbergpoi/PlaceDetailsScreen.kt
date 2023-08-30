@@ -222,7 +222,6 @@ class PlaceDetailsScreen(carContext: CarContext, private val item: POIItem) :
         }
 
         private fun getRatingsString(ratings: Double): CharSequence {
-            var r: Double = ratings
             val ss = SpannableString(FULL_STAR + " " + String.format(Locale.US, "%.1f", ratings))
 
             colorize(ss, CarColor.YELLOW, 0, 1)
