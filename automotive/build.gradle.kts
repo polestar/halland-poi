@@ -45,11 +45,20 @@ android {
                 "proguard-rules.pro"
             )
         }
+
+        debug {
+            isDebuggable = true
+            enableUnitTestCoverage = true
+            enableAndroidTestCoverage = true
+            testCoverage.jacocoVersion = "0.8.7"
+        }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+
     kotlinOptions {
         jvmTarget = "17"
     }
