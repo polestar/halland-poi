@@ -18,10 +18,14 @@ jobs:
         with:
           java-version: 1.8
 
-
-
       - name: Build and run tests
         run: ./gradlew clean testDebugUnitTest
+
+      - name: List coverage report directory
+        run: ls -R app/build/reports/jacoco/testDebugUnitTest/html
+
+      - name: Print coverage report file
+        run: cat app/build/reports/jacoco/testDebugUnitTest/html/index.html
 
       - name: Upload coverage report
         uses: actions/upload-artifact@v2
