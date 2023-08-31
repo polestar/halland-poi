@@ -18,6 +18,7 @@ plugins {
     id("kotlin-kapt") // Only for Kotlin projects.
     id("io.objectbox")
 }
+apply(from="../jacoco.gradle")
 
 android {
     signingConfigs {

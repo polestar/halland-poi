@@ -20,16 +20,16 @@ jobs:
           distribution: 'adopt'
 
       - name: Build and run tests
-        run: ./gradlew clean testDebugUnitTest
+        run: ./gradlew clean jacocoUnitTestReport
 
       - name: List coverage report directory
-        run: ls -R automotive/build/reports/tests/testDebugUnitTest
+        run: ls -R automotive/build/reports/jacoco/jacocoUnitTestReport
 
       - name: Print coverage report file
-        run: cat automotive/build/reports/tests/testDebugUnitTest/index.html
+        run: cat automotive/build/reports/jacoco/jacocoUnitTestReport/jacocoUnitTestReport.xml
 
       - name: Upload coverage report
         uses: actions/upload-artifact@v2
         with:
           name: coverage-report
-          path: automotive/build/reports/tests/testDebugUnitTest/index.html
+          path: automotive/build/reports/jacoco/jacocoUnitTestReport/jacocoUnitTestReport.xml
