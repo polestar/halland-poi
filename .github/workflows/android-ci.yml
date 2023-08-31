@@ -29,7 +29,8 @@ jobs:
         run: cat automotive/build/reports/jacoco/jacocoUnitTestReport/jacocoUnitTestReport.xml
 
       - name: Upload coverage report
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: coverage-report
           path: automotive/build/reports/jacoco/jacocoUnitTestReport/jacocoUnitTestReport.xml
+          retention-days: 1
