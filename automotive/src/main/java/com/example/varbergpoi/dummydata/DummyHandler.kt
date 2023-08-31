@@ -1,6 +1,5 @@
 package com.example.varbergpoi.dummydata
 
-import android.util.Log
 import com.example.varbergpoi.ObjectBox
 import com.example.varbergpoi.R
 import io.objectbox.annotation.Entity
@@ -246,7 +245,7 @@ class DummyHandler {
                         iconRes = R.drawable.bubble_star_ol
                     )
                 )
-                Log.d("Debug", "Populated objectbox")
+                //Log.d("Debug", "Populated objectbox")
                 categoryBox.put(categories)
             }
         }

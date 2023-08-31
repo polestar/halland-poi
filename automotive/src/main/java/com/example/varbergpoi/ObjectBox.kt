@@ -12,5 +12,9 @@ class ObjectBox {
         fun init(context: Context) {
             boxStore = MyObjectBox.builder().androidContext(context.applicationContext).build()
         }
+
+        fun initTest(){
+            boxStore = MyObjectBox.builder().build()
+        }
     }
 }
