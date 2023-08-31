@@ -1,7 +1,12 @@
 import java.io.FileInputStream
 import java.util.Properties
 
-val keystorePropertiesFile = rootProject.file("automotive/keystore.properties")
+var keystorePropertiesFile = rootProject.file("automotive/keystore.properties")
+if(!keystorePropertiesFile.exists()) {
+    logger.error("keystore.properties not properly configured! Using template to pass tests")
+    keystorePropertiesFile = rootProject.file("automotive/keystore.properties.template")
+}
+
 val keystoreProperties = Properties()
 keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 
