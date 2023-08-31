@@ -55,7 +55,7 @@ android {
             isDebuggable = true
             enableUnitTestCoverage = true
             enableAndroidTestCoverage = true
-            testCoverage.jacocoVersion = "0.8.7"
+            testCoverage.jacocoVersion = "0.8.8"
         }
     }
 
