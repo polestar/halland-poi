@@ -2,6 +2,7 @@ package com.example.varbergpoi
 
 import android.app.Application
 import com.example.varbergpoi.dummydata.DummyHandler
+import io.objectbox.android.BuildConfig
 import timber.log.Timber
 
 class POIApplication : Application() {
@@ -10,6 +11,7 @@ class POIApplication : Application() {
         ObjectBox.init(this)
         DummyHandler.initDummyData()
 
-        Timber.plant(Timber.DebugTree())
+        if(BuildConfig.DEBUG)
+            Timber.plant(Timber.DebugTree())
     }
 }
