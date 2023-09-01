@@ -9,12 +9,15 @@ class ObjectBox {
         lateinit var boxStore: BoxStore
             private set
 
-        fun init(context: Context) {
-            boxStore = MyObjectBox.builder().androidContext(context.applicationContext).build()
-        }
-
-        fun initTest(){
-            boxStore = MyObjectBox.builder().build()
+        /**
+         * Initializes the objectbox instance
+         * @property context Context should always be supplied on android, it is nullable only for testing
+         */
+        fun init(context: Context?) {
+            boxStore = if(context != null)
+                MyObjectBox.builder().androidContext(context.applicationContext).build()
+            else
+                MyObjectBox.builder().build()
         }
     }
 }

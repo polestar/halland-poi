@@ -5,6 +5,7 @@ import com.example.varbergpoi.R
 import io.objectbox.annotation.Entity
 import io.objectbox.annotation.Id
 import io.objectbox.relation.ToMany
+import timber.log.Timber
 
 class DummyHandler {
     companion object {
@@ -245,7 +246,7 @@ class DummyHandler {
                         iconRes = R.drawable.bubble_star_ol
                     )
                 )
-                //Log.d("Debug", "Populated objectbox")
+                Timber.d("Populated objectbox")
                 categoryBox.put(categories)
             }
         }

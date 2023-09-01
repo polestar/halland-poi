@@ -83,5 +83,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    implementation("androidx.car.app:app-automotive:1.2.0")
+    implementation(libs.androidx.app.automotive)
+    implementation(libs.timber)
 }
