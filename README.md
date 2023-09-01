@@ -1,4 +1,4 @@
-# conx-varberg-poi
+# halland-poi
 
 ## Building
 1. Add your upload keystore to the automotive folder
